@@ -1,5 +1,5 @@
 import {
-    RECEIVE_CATEGORIES,
+    RECEIVE_CATEGORIES
 } from '../actions'
 
 function categories(state = [], action) {
