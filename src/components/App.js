@@ -20,7 +20,7 @@ class App extends Component {
         <ul>
           {categories.map((cat) => (
 
-            <li>{cat.name}</li>
+            <li key={cat.path}>{cat.name}</li>
 
           ))}
         </ul>
@@ -35,7 +35,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   //console.log(state.categories)
   return {
-    categories: state.categories.categories
+    categories: state.categories
   }
 }
 
