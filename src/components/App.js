@@ -7,18 +7,24 @@ class App extends Component {
 
   componentDidMount() {
     this.props.fetchCat()
-    //this.props.getMyCatWow()
   }
 
   render() {
-    const {categories } = this.props
+    const { categories } = this.props
 
 
     return (
       <div className="App">
         <h1>Readable 02</h1>
-       { console.log("my props: " + JSON.stringify(categories)) }
-       {categories.map((c) => (c))}
+        {console.log("categories: " + JSON.stringify(categories))}
+        <ul>
+          {categories.map((cat) => (
+
+            <li>{cat.name}</li>
+
+          ))}
+        </ul>
+
 
       </div>
     );
@@ -29,14 +35,13 @@ class App extends Component {
 const mapStateToProps = (state) => {
   //console.log(state.categories)
   return {
-    categories: state.categories.list
+    categories: state.categories.categories
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCat: () => dispatch(fetchCategories())
-    //getMyCatWow: () => dispatch(receiveCategories('hello'))
+    fetchCat: () => dispatch(fetchCategories()),
   }
 }
 
