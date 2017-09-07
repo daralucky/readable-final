@@ -4,7 +4,7 @@ import { fetchCategories, fetchPosts } from '../actions'
 
 import PostList from './PostList'
 import AddNewPost from './AddNewPost'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 class App extends Component {
   componentDidMount() {
@@ -20,6 +20,7 @@ class App extends Component {
         {console.log("categories: " + JSON.stringify(this.props.categories))}
 
         <Route path='/' exact component={PostList} />
+
         {this.props.categories.map(category => (
           <Route path={`/${category.path}`} component={PostList} />
         ))}
@@ -44,7 +45,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(App))
