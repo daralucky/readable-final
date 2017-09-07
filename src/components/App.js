@@ -13,6 +13,19 @@ class App extends Component {
     this.props.fetchPosts()
   }
 
+  countPostComments = postId => {
+    //console.log('postId: ' + postId)
+    //console.log('comments: ' + JSON.stringify(this.props.comments))
+
+    let counter = this.props.comments.filter(c => c.parentId === postId)
+      .reduce((accumulator, currentValue) => {
+        //console.log('currentValue: ' + currentValue.id)
+        //console.log('accumulator: ' + accumulator)
+        return accumulator + 1
+      }, 0)
+    return counter
+  }
+
   render() {
     const { categories, posts } = this.props
 
@@ -42,17 +55,22 @@ class App extends Component {
         <div id='post-block'>
           <h3>Post:</h3>
           <p>
-            <span style={{ color: 'red', fontWeight: 'bold' }}>Order by:</span> timestamp | voteScore
+            <span style={{ color: 'red', fontWeight: 'bold' }}>Order by:</span> <a href='#orderByTime'>Time</a>
+             | <a href='#orderByVote'>Vote</a>
         </p>
           <ul>
             {myPosts.map((post) => (
 
               <li key={post.id}>
-                <a href={`${post.category}/${post.id}`}>{post.title}</a> author: {post.author} (NUMBER OF COMMENTS | score: {post.voteScore} | cat: {post.category} | time :
+                <a href={`${post.category}/${post.id}`}>{post.title}</a> author: {post.author} <button>Edit</button>  <button>Delete</button>
+                <br />
+                {this.countPostComments(post.id)} comments
+                 | score: {post.voteScore} <a href='#upVote'>Up</a> , <a href='#downVote'>Down</a>
+                 | category: {post.category} | time:
                 <Moment unix tz="Asia/Phnom_Penh">
                   {post.timestamp}
-                </Moment>)
-            </li>
+                </Moment>
+              </li>
 
             ))}
           </ul>
