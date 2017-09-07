@@ -9,22 +9,24 @@ import AddNewPost from './AddNewPost'
 class PostList extends Component {
 
     countPostComments = postId => {
-        //console.log('postId: ' + postId)
-        //console.log('comments: ' + JSON.stringify(this.props.comments))
-
         let counter = this.props.comments.filter(c => c.parentId === postId)
             .reduce((accumulator, currentValue) => {
-                //console.log('currentValue: ' + currentValue.id)
-                //console.log('accumulator: ' + accumulator)
                 return accumulator + 1
             }, 0)
         return counter
     }
 
+
     render() {
-        const { posts } = this.props
+        const { posts, showCategory } = this.props
 
         let myPosts = posts.sort(sortBy('voteScore'))
+
+        //console.log("showCategory: " + JSON.stringify(showCategory))
+        //filter posts by category
+        if (showCategory !== 'SHOW_ALL') {
+            myPosts = myPosts.filter(p => p.category === showCategory)
+        }
 
         return (
             <div id='post-list'>
@@ -32,7 +34,7 @@ class PostList extends Component {
                 <CategoryBock />
 
                 <div id='post-block'>
-                    {console.log("myPosts: " + JSON.stringify(myPosts))}
+
                     <h3>Post:</h3>
                     <p>
                         <span style={{ color: 'red', fontWeight: 'bold' }}>Order by:</span> <a href='#orderByTime'>Time</a>

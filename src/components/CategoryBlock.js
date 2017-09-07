@@ -18,7 +18,7 @@ class CategoryBlock extends Component {
                 >Root</NavLink>
 
                 {categories.map((cat) => (
-                    <span> | <NavLink to={`/${cat.path}`}
+                    <span key={cat.path}> | <NavLink to={`/${cat.path}`}
                         activeStyle={{
                             fontWeight: 'bold',
                             color: 'red'
