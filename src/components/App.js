@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchCategories, fetchPosts } from '../actions'
 import sortBy from 'sort-by'
+import Moment from 'react-moment'
+import 'moment-timezone'
+
 class App extends Component {
 
 
@@ -44,7 +47,10 @@ class App extends Component {
             {myPosts.map((post) => (
 
               <li key={post.id}>
-                {post.title} (score: {post.voteScore} | cat: {post.category} | time : {post.timestamp})
+                {post.title} (score: {post.voteScore} | cat: {post.category} | time :
+                <Moment unix tz="Asia/Phnom_Penh">
+                  {post.timestamp}
+                </Moment>)
             </li>
 
             ))}
@@ -53,7 +59,7 @@ class App extends Component {
 
         <div id='add-new-post-block'>
           <p style={{ textAlign: 'center' }}>
-            <a href='#'>ADD NEW POST</a>
+            <a href='#newpost'>ADD NEW POST</a>
           </p>
         </div>
 
