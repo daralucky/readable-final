@@ -7,27 +7,23 @@ class CategoryBlock extends Component {
     render() {
         const { categories } = this.props
 
+        const style = {
+            fontWeight: 'bold',
+            color: 'red'
+        }
+
         return (
             <div id='category-block'>
                 <strong>Category: </strong>
-                <NavLink to='/' exact
-                    activeStyle={{
-                        fontWeight: 'bold',
-                        color: 'red'
-                    }}
-                >Root</NavLink>
+                <NavLink to='/' exact activeStyle={style} >Root</NavLink>
 
                 {categories.map((cat) => (
                     <span key={cat.path}> | <NavLink to={`/${cat.path}`}
-                        activeStyle={{
-                            fontWeight: 'bold',
-                            color: 'red'
-                        }}
+                        activeStyle={style}
                     >{cat.name}</NavLink></span>
                 ))}
             </div>
         )
-
     }
 }
 
