@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchCategories, fetchPosts } from '../actions'
 import sortBy from 'sort-by'
 import Moment from 'react-moment'
 import 'moment-timezone'
+import { fetchCategories, fetchPosts } from '../actions'
 
 class App extends Component {
 
@@ -17,6 +17,7 @@ class App extends Component {
     const { categories, posts } = this.props
 
     let myPosts = posts.sort(sortBy('voteScore'))
+
 
     return (
       <div className="App">
@@ -73,7 +74,8 @@ const mapStateToProps = (state) => {
   //console.log(state.categories)
   return {
     categories: state.categories,
-    posts: state.posts
+    posts: state.posts,
+    comments: state.comments
   }
 }
 

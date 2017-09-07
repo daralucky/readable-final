@@ -34,3 +34,8 @@ export const getPostsById = (Id) =>
 
 
 //Comments
+
+//Get all the comments for a single post
+export const getCommentByPostId = (Id) =>
+  fetch(`${api}/posts/${Id}/comments`, { headers })
+    .then(res => res.json())
