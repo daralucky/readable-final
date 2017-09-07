@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 class CategoryBlock extends Component {
 
@@ -8,17 +9,23 @@ class CategoryBlock extends Component {
 
         return (
             <div id='category-block'>
-                <h3>Category:</h3>
-                <ul>
-                    <li key='all'>
-                        <a href='/'>Root</a>
-                    </li>
+                <strong>Category:</strong>
+                       <NavLink to='/' exact
+                            activeStyle={{
+                                fontWeight: 'bold',
+                                color: 'red'
+                            }}
+                        >Root</NavLink>
+
                     {categories.map((cat) => (
-                        <li key={cat.path}>
-                            <a href={cat.path}>{cat.name}</a>
-                        </li>
+                             <NavLink to={`/${cat.path}`}
+                                activeStyle={{
+                                    fontWeight: 'bold',
+                                    color: 'red'
+                                }}
+                            > | {cat.name}</NavLink>
+
                     ))}
-                </ul>
             </div>
         )
 
@@ -30,6 +37,5 @@ const mapStateToProps = (state) => {
         categories: state.categories,
     }
 }
-
 
 export default connect(mapStateToProps)(CategoryBlock)

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import sortBy from 'sort-by'
 import Moment from 'react-moment'
 import 'moment-timezone'
+import CategoryBock from './CategoryBlock'
 
 class PostList extends Component {
 
@@ -25,29 +26,33 @@ class PostList extends Component {
         let myPosts = posts.sort(sortBy('voteScore'))
 
         return (
+            <div id='post-list'>
 
-            <div id='post-block'>
-                {console.log("myPosts: " + JSON.stringify(myPosts))}
-                <h3>Post:</h3>
-                <p>
-                    <span style={{ color: 'red', fontWeight: 'bold' }}>Order by:</span> <a href='#orderByTime'>Time</a>
-                    | <a href='#orderByVote'>Vote</a>
-                </p>
-                <ul>
-                    {myPosts.map((post) => (
+                <CategoryBock />
 
-                        <li key={post.id} style={{ marginBottom: '20px' }}>
-                            <a href={`${post.category}/${post.id}`}>{post.title}</a> author: {post.author} <button>Edit</button>  <button>Delete</button>
-                            <br />
-                            {this.countPostComments(post.id)} comments
+                <div id='post-block'>
+                    {console.log("myPosts: " + JSON.stringify(myPosts))}
+                    <h3>Post:</h3>
+                    <p>
+                        <span style={{ color: 'red', fontWeight: 'bold' }}>Order by:</span> <a href='#orderByTime'>Time</a>
+                        | <a href='#orderByVote'>Vote</a>
+                    </p>
+                    <ul>
+                        {myPosts.map((post) => (
+
+                            <li key={post.id} style={{ marginBottom: '20px' }}>
+                                <a href={`${post.category}/${post.id}`}>{post.title}</a> author: {post.author} <button>Edit</button>  <button>Delete</button>
+                                <br />
+                                {this.countPostComments(post.id)} comments
                  | score: {post.voteScore} <a href='#upVote'>Vote Up</a> , <a href='#downVote'>Vote Down</a>
-                            | category: {post.category} | time:
+                                | category: {post.category} | time:
                 <Moment unix tz="Asia/Phnom_Penh">
-                                {post.timestamp}
-                            </Moment>
-                        </li>
-                    ))}
-                </ul>
+                                    {post.timestamp}
+                                </Moment>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         )
     }
