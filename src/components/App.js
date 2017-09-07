@@ -47,7 +47,7 @@ class App extends Component {
             {myPosts.map((post) => (
 
               <li key={post.id}>
-                {post.title} (score: {post.voteScore} | cat: {post.category} | time :
+                <a href={`${post.category}/${post.id}`}>{post.title}</a> author: {post.author} (NUMBER OF COMMENTS | score: {post.voteScore} | cat: {post.category} | time :
                 <Moment unix tz="Asia/Phnom_Penh">
                   {post.timestamp}
                 </Moment>)
@@ -59,7 +59,7 @@ class App extends Component {
 
         <div id='add-new-post-block'>
           <p style={{ textAlign: 'center' }}>
-            <a href='#newpost'>ADD NEW POST</a>
+            <a href='#addNewPost'>ADD NEW POST</a>
           </p>
         </div>
 
