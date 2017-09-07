@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchCategories, fetchPosts } from '../actions'
-
+import sortBy from 'sort-by'
 class App extends Component {
 
 
@@ -13,31 +13,49 @@ class App extends Component {
   render() {
     const { categories, posts } = this.props
 
+    let myPosts = posts.sort(sortBy('voteScore'))
 
     return (
       <div className="App">
         <h1>Readable 02</h1>
 
         {console.log("categories: " + JSON.stringify(categories))}
-        <h3>Category:</h3>
-        <ul>
-          {categories.map((cat) => (
+        <div id='category-block'>
+          <h3>Category:</h3>
+          <ul>
+            <li key='all'>
+              <a href='/'>Root</a>
+            </li>
+            {categories.map((cat) => (
+              <li key={cat.path}>
+                <a href={cat.path}>{cat.name}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-            <li key={cat.path}>{cat.name}</li>
+        {console.log("myPosts: " + JSON.stringify(myPosts))}
+        <div id='post-block'>
+          <h3>Post:</h3>
+          <p>
+            <span style={{ color: 'red', fontWeight: 'bold' }}>Order by:</span> timestamp | voteScore
+        </p>
+          <ul>
+            {myPosts.map((post) => (
 
-          ))}
-        </ul>
+              <li key={post.id}>
+                {post.title} (score: {post.voteScore} | cat: {post.category} | time : {post.timestamp})
+            </li>
 
-        {console.log("posts: " + JSON.stringify(posts))}
-        <h3>Post:</h3>
-        <ul>
-          {posts.map((post) => (
+            ))}
+          </ul>
+        </div>
 
-            <li key={post.id}>{post.title}</li>
-
-          ))}
-        </ul>
-
+        <div id='add-new-post-block'>
+          <p style={{ textAlign: 'center' }}>
+            <a href='#'>ADD NEW POST</a>
+          </p>
+        </div>
 
       </div>
     );
