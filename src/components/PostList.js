@@ -4,6 +4,7 @@ import sortBy from 'sort-by'
 import Moment from 'react-moment'
 import 'moment-timezone'
 import CategoryBock from './CategoryBlock'
+import AddNewPost from './AddNewPost'
 
 class PostList extends Component {
 
@@ -53,6 +54,9 @@ class PostList extends Component {
                         ))}
                     </ul>
                 </div>
+
+                <AddNewPost />
+
             </div>
         )
     }

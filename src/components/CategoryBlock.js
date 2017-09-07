@@ -9,23 +9,22 @@ class CategoryBlock extends Component {
 
         return (
             <div id='category-block'>
-                <strong>Category:</strong>
-                       <NavLink to='/' exact
-                            activeStyle={{
-                                fontWeight: 'bold',
-                                color: 'red'
-                            }}
-                        >Root</NavLink>
+                <strong>Category: </strong>
+                <NavLink to='/' exact
+                    activeStyle={{
+                        fontWeight: 'bold',
+                        color: 'red'
+                    }}
+                >Root</NavLink>
 
-                    {categories.map((cat) => (
-                             <NavLink to={`/${cat.path}`}
-                                activeStyle={{
-                                    fontWeight: 'bold',
-                                    color: 'red'
-                                }}
-                            > | {cat.name}</NavLink>
-
-                    ))}
+                {categories.map((cat) => (
+                    <span> | <NavLink to={`/${cat.path}`}
+                        activeStyle={{
+                            fontWeight: 'bold',
+                            color: 'red'
+                        }}
+                    >{cat.name}</NavLink></span>
+                ))}
             </div>
         )
 

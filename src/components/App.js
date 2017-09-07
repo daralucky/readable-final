@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchCategories, fetchPosts } from '../actions'
-
-import PostList from './PostList'
-import AddNewPost from './AddNewPost'
 import { Route, withRouter } from 'react-router-dom'
+import { fetchCategories, fetchPosts } from '../actions'
+import PostList from './PostList'
 
 class App extends Component {
   componentDidMount() {
@@ -24,8 +22,6 @@ class App extends Component {
         {this.props.categories.map(category => (
           <Route path={`/${category.path}`} component={PostList} />
         ))}
-
-        <AddNewPost />
 
       </div>
     );
