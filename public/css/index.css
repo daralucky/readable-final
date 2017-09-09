@@ -3,10 +3,9 @@
 */
 
 .my-page-header {
-    color: OrangeRed;
-    padding-bottom: 0px;
-    margin: 10px 0 10px;
-    border-bottom: 1px solid Aqua;
+     padding-bottom: 0px;
+    margin: 10px 0 20px;
+    border-bottom: 2px solid LightSalmon ;
 }
 
 .my-well-height {
@@ -51,7 +50,9 @@
 }
 
 .link {
-    margin: 0;
+    margin: 0 0 10px;
+    padding-bottom: 0px;
+    border-bottom: 1px solid LightGrey;
 }
 
 div {
@@ -91,10 +92,11 @@ div {
     margin-bottom: 1px;
 }
 
-.tagline {
+tagline {
     color: #888;
-    font-size: x-small;
-    margin: 0 0 0 0px;
+    font-size: smaller;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .link .flat-list {
@@ -109,6 +111,7 @@ div {
 
 ol, ul {
     list-style: none;
+    font-size: lar
 }
 
 .entry .buttons li {
