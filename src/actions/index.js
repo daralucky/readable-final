@@ -41,8 +41,6 @@ export const fetchPosts = () => dispatch => (
 
         dispatch(receivePosts(posts))
 
-        dispatch(updateSettings('orderPost', '-voteScore'))
-
       })
 )
 

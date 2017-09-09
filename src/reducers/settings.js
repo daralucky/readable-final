@@ -2,7 +2,11 @@ import {
     UPDATE_SETTINGS
 } from '../actions'
 
-function settings(state = {}, action) {
+const initialState = {
+    orderPost: '-voteScore'
+}
+
+function settings(state = initialState, action) {
     const {key, value} = action
     switch (action.type) {
         case UPDATE_SETTINGS:
