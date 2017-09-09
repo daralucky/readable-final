@@ -41,23 +41,23 @@ class PostList extends Component {
 
                 <div id='post-block'>
 
-                    <div className="my-page-header">
+                    <div className="my-post-list-page-header">
                         <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}> Showing posts in {currentCategory}</span>
-                        <span style={{ color: 'red', marginLeft: '100px' }}>Order by: <a href='#orderByTime'>Time</a>
-                            | <a href='#orderByVote'>Vote</a> </span>
+                        <span style={{ color: 'red'}} className="pull-right">Order by: <Button bsStyle="primary" bsSize="xsmall">Time</Button> <Button  bsSize="xsmall">
+                            Vote Score</Button> </span>
                     </div>
 
                     {myPosts.map((post) => (
                         <div className="link">
                             <div className="midcol">
-                                <div className="text-center" tabindex="0">
+                                <div className="text-center" tabindex="0" title="Vote Up">
                                     <Button onClick={this.onHome} bsStyle="success" bsSize="xsmall">
                                         <Glyphicon glyph="thumbs-up" />
                                     </Button>
                                 </div>
-                                <div className="my-post-votescore">{post.voteScore}</div>
-                                <div className="text-center" tabindex="0">
-                                    <Button onClick={this.onHome} bsStyle="danger" bsSize="xsmall">
+                                <div className="my-post-votescore" title={`${post.voteScore} Vote Score`}>{post.voteScore}</div>
+                                <div className="text-center" tabindex="0" title="Vote Down">
+                                    <Button onClick={this.onHome} bsStyle="info" bsSize="xsmall">
                                         <Glyphicon glyph="thumbs-down" />
                                     </Button>
                                 </div>
