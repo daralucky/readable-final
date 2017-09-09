@@ -5,8 +5,9 @@ import Moment from 'react-moment'
 import 'moment-timezone'
 import NavigationBar from './NavigationBar'
 import AddNewPost from './AddNewPost'
-import { PageHeader, Glyphicon, Label, Button } from 'react-bootstrap'
+import { Glyphicon, Button } from 'react-bootstrap'
 import { capitalize } from '../utils/helpers'
+import { updateSettings } from '../actions'
 
 class PostList extends Component {
 
@@ -18,11 +19,10 @@ class PostList extends Component {
         return counter
     }
 
-
     render() {
-        const { posts, showCategory } = this.props
+        const { posts, showCategory, settings, changeSettings } = this.props
 
-        let myPosts = posts.sort(sortBy('voteScore'))
+        let myPosts = posts.sort(sortBy(settings.orderPost))
 
         //console.log("showCategory: " + JSON.stringify(showCategory))
         //filter posts by category
@@ -43,20 +43,26 @@ class PostList extends Component {
 
                     <div className="my-post-list-page-header">
                         <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}> Showing posts in {currentCategory}</span>
-                        <span style={{ color: 'red'}} className="pull-right">Order by: <Button bsStyle="primary" bsSize="xsmall">Time</Button> <Button  bsSize="xsmall">
-                            Vote Score</Button> </span>
+                        <span style={{ color: 'red' }} className="pull-right">
+                            Order by: <Button bsStyle={settings.orderPost === '-timestamp' ? 'primary' : 'default'} bsSize="xsmall"
+                                onClick={() => changeSettings('orderPost', '-timestamp')}
+                            >
+                                Time</Button> <Button bsStyle={settings.orderPost === '-voteScore' ? 'primary' : 'default'} bsSize="xsmall"
+                                    onClick={() => changeSettings('orderPost', '-voteScore')}
+                                >
+                                Vote Score</Button> </span>
                     </div>
 
                     {myPosts.map((post) => (
-                        <div className="link">
+                        <div className="link" key={post.id}>
                             <div className="midcol">
-                                <div className="text-center" tabindex="0" title="Vote Up">
+                                <div tabIndex="0" title="Vote Up">
                                     <Button onClick={this.onHome} bsStyle="success" bsSize="xsmall">
                                         <Glyphicon glyph="thumbs-up" />
                                     </Button>
                                 </div>
                                 <div className="my-post-votescore" title={`${post.voteScore} Vote Score`}>{post.voteScore}</div>
-                                <div className="text-center" tabindex="0" title="Vote Down">
+                                <div tabIndex="0" title="Vote Down">
                                     <Button onClick={this.onHome} bsStyle="info" bsSize="xsmall">
                                         <Glyphicon glyph="thumbs-down" />
                                     </Button>
@@ -92,7 +98,7 @@ class PostList extends Component {
 
                 <AddNewPost />
 
-            </div>
+            </div >
         )
     }
 }
@@ -100,8 +106,15 @@ class PostList extends Component {
 const mapStateToProps = state => {
     return {
         posts: state.posts,
-        comments: state.comments
+        comments: state.comments,
+        settings: state.settings
     }
 }
 
-export default connect(mapStateToProps)(PostList)
+const mapDispatchToProps = dispatch => {
+    return {
+        changeSettings: (key, value) => dispatch(updateSettings(key, value))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList)

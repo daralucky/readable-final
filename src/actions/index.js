@@ -3,6 +3,13 @@ import * as ReadableAPI from '../utils/ReadableAPI'
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
 export const RECEIVE_POSTS = "RECEIVE_POSTS"
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
+export const UPDATE_SETTINGS = "UPDATE_SETTINGS"
+
+export const updateSettings= (key, value) => ({
+  type: UPDATE_SETTINGS,
+  key,
+  value
+})
 
 
 export const receiveComments= comments => ({
@@ -33,6 +40,8 @@ export const fetchPosts = () => dispatch => (
         )
 
         dispatch(receivePosts(posts))
+
+        dispatch(updateSettings('orderPost', '-voteScore'))
 
       })
 )
