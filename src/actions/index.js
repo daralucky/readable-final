@@ -4,6 +4,9 @@ export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
 export const RECEIVE_POSTS = "RECEIVE_POSTS"
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
 export const UPDATE_SETTINGS = "UPDATE_SETTINGS"
+export const POST_VOTE_UP = "POST_VOTE_UP"
+
+
 
 export const updateSettings= (key, value) => ({
   type: UPDATE_SETTINGS,
@@ -23,6 +26,11 @@ export const fetchComments= (postId) => dispatch => (
       .then(comments => dispatch(receiveComments(comments)))
 )
 
+
+export const postVoteUp = id => ({
+  type: POST_VOTE_UP,
+  id
+})
 
 export const receivePosts= posts => ({
   type: RECEIVE_POSTS,

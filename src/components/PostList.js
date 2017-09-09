@@ -7,7 +7,7 @@ import NavigationBar from './NavigationBar'
 import AddNewPost from './AddNewPost'
 import { Glyphicon, Button } from 'react-bootstrap'
 import { capitalize } from '../utils/helpers'
-import { updateSettings } from '../actions'
+import { updateSettings, postVoteUp } from '../actions'
 
 class PostList extends Component {
 
@@ -20,7 +20,7 @@ class PostList extends Component {
     }
 
     render() {
-        const { posts, showCategory, settings, changeSettings } = this.props
+        const { posts, showCategory, settings, changeSettings, votePostUp } = this.props
 
         let myPosts = posts.sort(sortBy(settings.orderPost))
 
@@ -57,7 +57,9 @@ class PostList extends Component {
                         <div className="link" key={post.id}>
                             <div className="midcol">
                                 <div tabIndex="0" title="Vote Up">
-                                    <Button onClick={this.onHome} bsStyle="success" bsSize="xsmall">
+                                    <Button onClick={this.onHome} bsStyle="success" bsSize="xsmall"
+                                        onClick={() => votePostUp(post.id)}
+                                    >
                                         <Glyphicon glyph="thumbs-up" />
                                     </Button>
                                 </div>
@@ -113,7 +115,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeSettings: (key, value) => dispatch(updateSettings(key, value))
+        changeSettings: (key, value) => dispatch(updateSettings(key, value)),
+        votePostUp: (postId) => (dispatch(postVoteUp(postId)))
     }
 }
 

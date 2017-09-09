@@ -7,9 +7,9 @@ const initialState = {
 }
 
 function settings(state = initialState, action) {
-    const {key, value} = action
     switch (action.type) {
         case UPDATE_SETTINGS:
+            const { key, value } = action
             return {
                 ...state,
                 [key]: value
