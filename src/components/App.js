@@ -13,16 +13,15 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <h1>Readable 02</h1>
+      <div id="App" className="container">
 
-        <Route path='/' exact showCategory='SHOW_ALL' render={() =>
-          <PostList showCategory='SHOW_ALL' />
+        <Route path='/' exact render={() =>
+          <PostList showCategory='' />
         } />
 
         {this.props.categories.map(category => (
           <Route key={category.path} path={`/${category.path}`} render={() =>
-            <PostList showCategory={category.path} />
+            <PostList showCategory={category.name} />
           } />
         ))}
 

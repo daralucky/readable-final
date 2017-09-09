@@ -1,0 +1,147 @@
+/*
+    My Styles and for overwriting default bootstrap styles
+*/
+
+.my-page-header {
+    color: OrangeRed;
+    padding-bottom: 0px;
+    margin: 10px 0 10px;
+    border-bottom: 1px solid Aqua;
+}
+
+.my-well-height {
+    height: 100px;
+}
+
+.my-padding-left-1 {
+    padding-left: 1px;
+}
+
+.my-padding-right-1 {
+    padding-right: 1px;
+}
+
+.my-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+.my-post-votescore {
+    text-align: center;
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: inherit;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/*************************************************************/
+
+.link listing .link {
+    margin-bottom: 5px;
+}
+
+.link listing .odd {
+    overflow: hidden!important;
+    margin-left: 1px;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+}
+
+.link {
+    margin: 0;
+}
+
+div {
+    display: block;
+}
+
+.sitetable {
+    list-style-type: none;
+}
+
+.content .link .midcol, .midcol-spacer {
+    width: 6.1ex;
+}
+
+.link .midcol {
+    font-weight: bold;
+    font-size: small;
+}
+
+.midcol {
+    float: left;
+    margin-right: 11px;
+    margin-left: 0px;
+    background: transparent;
+    overflow: visible;
+}
+
+.entry {
+    overflow: hidden;
+    margin-left: 3px;
+    opacity: 1;
+}
+
+.link .title {
+    font-size: medium;
+    font-weight: normal;
+    margin-bottom: 1px;
+}
+
+.tagline {
+    color: #888;
+    font-size: x-small;
+    margin: 0 0 0 0px;
+}
+
+.link .flat-list {
+    display: block;
+    padding: 1px 0;
+}
+
+.flat-list {
+    list-style-type: none;
+    display: inline;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+.entry .buttons li {
+    display: inline-block;
+    border: none;
+    padding-right: 4px;
+    line-height: 1.6em;
+}
+
+.flat-list li, .flat-list form {
+    display: inline;
+    white-space: nowrap;
+}
+
+.entry .buttons li+li {
+    padding-left: 4px;
+}
+
+.flat-list li, .flat-list form {
+    display: inline;
+    white-space: nowrap;
+}
+
+.entry .buttons li a {
+    color: #888;
+    font-weight: bold;
+    padding: 0 1px;
+    font-size: smaller;
+}
+
+
+
+
+
+
+
