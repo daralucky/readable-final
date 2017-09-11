@@ -42,9 +42,12 @@ export const fetchComments = (postId) => dispatch => (
 )
 
 
-export const postVoteUp = id => ({
+export const postVoteUp = (id, newVoteScore) => ({
   type: POST_VOTE_UP,
-  id
+  payload: {
+    id,
+    newVoteScore
+  }
 })
 
 export const receivePosts = posts => ({

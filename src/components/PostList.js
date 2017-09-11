@@ -60,7 +60,7 @@ class PostList extends Component {
                             <div className="midcol">
                                 <div tabIndex="0" title="Vote Up">
                                     <Button bsStyle="success" bsSize="xsmall"
-                                        onClick={() => votePostUp(post.id)}
+                                        onClick={() => votePostUp(post.id, (post.voteScore + 1))}
                                     >
                                         <Glyphicon glyph="thumbs-up" />
                                     </Button>
@@ -110,12 +110,12 @@ class PostList extends Component {
 const mapStateToProps = state => {
 
     let posts = []
-    for (let [k, myPost] of Object.entries(state.posts)) {
+    for (let myPost of Object.values(state.posts)) {
         posts.push(myPost)
     }
 
     let comments = []
-    for (let [j, myComment] of Object.entries(state.comments)) {
+    for (let myComment of Object.values(state.comments)) {
         comments.push(myComment)
     }
 
@@ -129,7 +129,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeSettings: (key, value) => dispatch(updateSettings(key, value)),
-        votePostUp: (postId) => (dispatch(postVoteUp(postId)))
+        votePostUp: (postId, newSore) => (dispatch(postVoteUp(postId, newSore)))
     }
 }
 

@@ -35,7 +35,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     let categories = []
-    for (let [k, myCat] of Object.entries(state.categories)) {
+    for (let myCat of Object.values(state.categories)) {
         categories.push(myCat)
     }
 
