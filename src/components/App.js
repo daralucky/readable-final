@@ -35,12 +35,11 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     let categories = []
-    for (let [key, myCat] of Object.entries(state.categories)) {
+    for (let [k, myCat] of Object.entries(state.categories)) {
         categories.push(myCat)
     }
 
     return { categories }
-
 }
 
 const mapDispatchToProps = (dispatch) => {

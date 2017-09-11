@@ -3,11 +3,12 @@ import {
     POST_VOTE_UP
 } from '../actions'
 
-function posts(state = [], action) {
+function posts(state = {}, action) {
     switch (action.type) {
         case RECEIVE_POSTS:
-            return [...state, ...action.posts]
+            return { ...state, ...action.posts }
 
+        /*
         case POST_VOTE_UP:
             const { id } = action
             if (state.posts) {
@@ -23,7 +24,7 @@ function posts(state = [], action) {
             } else {
                 return state
             }
-
+        */
 
         default:
             return state

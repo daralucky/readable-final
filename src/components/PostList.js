@@ -26,6 +26,7 @@ class PostList extends Component {
 
         //console.log("showCategory: " + JSON.stringify(showCategory))
         //filter posts by category
+
         let currentCategory
         if (showCategory !== '') {
             myPosts = myPosts.filter(p => p.category === showCategory)
@@ -53,11 +54,12 @@ class PostList extends Component {
                                 Vote Score</Button> </span>
                     </div>
 
-                    {myPosts.map((post) => (
+                    {
+                        myPosts.map((post) => (
                         <div className="link" key={post.id}>
                             <div className="midcol">
                                 <div tabIndex="0" title="Vote Up">
-                                    <Button onClick={this.onHome} bsStyle="success" bsSize="xsmall"
+                                    <Button bsStyle="success" bsSize="xsmall"
                                         onClick={() => votePostUp(post.id)}
                                     >
                                         <Glyphicon glyph="thumbs-up" />
@@ -86,7 +88,7 @@ class PostList extends Component {
                                     </p>
                                     <ul className="flat-list buttons">
                                         <li>
-                                            <a href="#mylink" rel="nofollow" className="deco-none">478 comments</a>
+                                            <a href="#mylink" rel="nofollow" className="deco-none">{this.countPostComments(post.id)} comments</a>
                                         </li>
                                         <li>
                                             <a href='/redux'>posted in {capitalize(post.category)}</a>
@@ -95,7 +97,7 @@ class PostList extends Component {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )) }
                 </div>
 
                 <AddNewPost />
@@ -106,9 +108,20 @@ class PostList extends Component {
 }
 
 const mapStateToProps = state => {
+
+    let posts = []
+    for (let [k, myPost] of Object.entries(state.posts)) {
+        posts.push(myPost)
+    }
+
+    let comments = []
+    for (let [j, myComment] of Object.entries(state.comments)) {
+        comments.push(myComment)
+    }
+
     return {
-        posts: state.posts,
-        comments: state.comments,
+        posts,
+        comments,
         settings: state.settings
     }
 }
