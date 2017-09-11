@@ -11,6 +11,7 @@ class App extends Component {
   }
 
   render() {
+    const { categories } = this.props
 
     return (
       <div id="App" className="container">
@@ -19,11 +20,13 @@ class App extends Component {
           <PostList showCategory='' />
         } />
 
-        {this.props.categories.map(category => (
+        {
+          categories.map(category => (
           <Route key={category.path} path={`/${category.path}`} render={() =>
             <PostList showCategory={category.name} />
           } />
-        ))}
+        ))
+        }
 
       </div>
     );
@@ -31,9 +34,13 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    categories: state.categories
-  }
+    let categories = []
+    for (let [key, myCat] of Object.entries(state.categories)) {
+        categories.push(myCat)
+    }
+
+    return { categories }
+
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -5,6 +5,7 @@
   "dependencies": {
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
+    "normalizr": "^3.2.3",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^15.6.1",
