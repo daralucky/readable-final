@@ -5,7 +5,7 @@ This repo is for "Readable" project for [React Nanodegree program](https://www.u
 
 ## Project Setup
 
-* clone the Project - `git clone https://github.com/daralucky/readable-02.git`
+* clone the Project - `git clone https://github.com/daralucky/readable-03.git`
 * install the dependencies - `npm install`
 * start the server - `npm start`
 
