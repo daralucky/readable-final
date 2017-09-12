@@ -6,23 +6,32 @@ import {
 function posts(state = {}, action) {
     switch (action.type) {
         case RECEIVE_POSTS:
-            return { ...state, ...action.posts }
-
+            return {
+                ...state,
+                ...action.posts
+            }
 
         case POST_VOTE_UP:
             const { id, newVoteScore } = action.payload
 
+            /*
+            // spread syntax version
             return {
                 ...state,
-                    ...state.posts,
-                    [id]: {
-                        ...state.posts,
-                        voteScore: newVoteScore
-                    }
-
-
+                [id]: {
+                    ...state[id],
+                    voteScore: newVoteScore,
+                },
             }
+            */
 
+            const updatedPost = state[id]
+            updatedPost.voteScore = newVoteScore
+
+            return {
+                ...state,
+                [id]: updatedPost
+            }
 
         default:
             return state
