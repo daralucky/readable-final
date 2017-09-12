@@ -7,7 +7,7 @@ import NavigationBar from './NavigationBar'
 import AddNewPost from './AddNewPost'
 import { Glyphicon, Button } from 'react-bootstrap'
 import { capitalize } from '../utils/helpers'
-import { updateSettings, postVoteUp } from '../actions'
+import { updateSettings, postUpdateVote } from '../actions'
 
 class PostList extends Component {
 
@@ -20,7 +20,7 @@ class PostList extends Component {
     }
 
     render() {
-        const { posts, showCategory, settings, changeSettings, votePostUp } = this.props
+        const { posts, showCategory, settings, changeSettings, votePost } = this.props
 
         let myPosts = posts.sort(sortBy(settings.orderPost))
 
@@ -56,48 +56,50 @@ class PostList extends Component {
 
                     {
                         myPosts.map((post) => (
-                        <div className="link" key={post.id}>
-                            <div className="midcol">
-                                <div tabIndex="0" title="Vote Up">
-                                    <Button bsStyle="success" bsSize="xsmall"
-                                        onClick={() => votePostUp(post.id, (post.voteScore + 1))}
-                                    >
-                                        <Glyphicon glyph="thumbs-up" />
-                                    </Button>
+                            <div className="link" key={post.id}>
+                                <div className="midcol">
+                                    <div tabIndex="0" title="Vote Up">
+                                        <Button bsStyle="success" bsSize="xsmall"
+                                            onClick={() => votePost(post.id, (post.voteScore + 1))}
+                                        >
+                                            <Glyphicon glyph="thumbs-up" />
+                                        </Button>
+                                    </div>
+                                    <div className="my-post-votescore" title={`${post.voteScore} Vote Score`}>{post.voteScore}</div>
+                                    <div tabIndex="0" title="Vote Down">
+                                        <Button bsStyle="info" bsSize="xsmall"
+                                            onClick={() => votePost(post.id, (post.voteScore - 1))}
+                                        >
+                                            <Glyphicon glyph="thumbs-down" />
+                                        </Button>
+                                    </div>
                                 </div>
-                                <div className="my-post-votescore" title={`${post.voteScore} Vote Score`}>{post.voteScore}</div>
-                                <div tabIndex="0" title="Vote Down">
-                                    <Button onClick={this.onHome} bsStyle="info" bsSize="xsmall">
-                                        <Glyphicon glyph="thumbs-down" />
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="entry">
-                                <div>
-                                    <p className="title">
-                                        <a className="title" href={`${post.category}/${post.id}`}>
-                                            {post.title}</a> <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
-                                            <Glyphicon glyph="pencil" /> Edit
+                                <div className="entry">
+                                    <div>
+                                        <p className="title">
+                                            <a className="title" href={`${post.category}/${post.id}`}>
+                                                {post.title}</a> <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
+                                                <Glyphicon glyph="pencil" /> Edit
                                 </Button> <Button onClick={this.onHome} bsStyle="danger" bsSize="xsmall">
-                                            <Glyphicon glyph="trash" /> Delete </Button>
-                                    </p>
-                                    <p className="tagline">
-                                        submitted on <Moment unix tz="Asia/Phnom_Penh">
-                                            {post.timestamp}
-                                        </Moment> by {post.author}
-                                    </p>
-                                    <ul className="flat-list buttons">
-                                        <li>
-                                            <a href="#mylink" rel="nofollow" className="deco-none">{this.countPostComments(post.id)} comments</a>
-                                        </li>
-                                        <li>
-                                            <a href='/redux'>posted in {capitalize(post.category)}</a>
-                                        </li>
-                                    </ul>
+                                                <Glyphicon glyph="trash" /> Delete </Button>
+                                        </p>
+                                        <p className="tagline">
+                                            submitted on <Moment unix tz="Asia/Phnom_Penh">
+                                                {post.timestamp}
+                                            </Moment> by {post.author}
+                                        </p>
+                                        <ul className="flat-list buttons">
+                                            <li>
+                                                <a href="#mylink" rel="nofollow" className="deco-none">{this.countPostComments(post.id)} comments</a>
+                                            </li>
+                                            <li>
+                                                <a href='/redux'>posted in {capitalize(post.category)}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )) }
+                        ))}
                 </div>
 
                 <AddNewPost />
@@ -129,7 +131,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeSettings: (key, value) => dispatch(updateSettings(key, value)),
-        votePostUp: (postId, newSore) => (dispatch(postVoteUp(postId, newSore)))
+        votePost: (postId, newSore) => (dispatch(postUpdateVote(postId, newSore)))
     }
 }
 

@@ -7,7 +7,7 @@ export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
 export const RECEIVE_POSTS = "RECEIVE_POSTS"
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
 export const UPDATE_SETTINGS = "UPDATE_SETTINGS"
-export const POST_VOTE_UP = "POST_VOTE_UP"
+export const POST_UPDATE_VOTE = "POST_UPDATE_VOTE"
 
 
 export const updateSettings = (key, value) => ({
@@ -42,8 +42,8 @@ export const fetchComments = (postId) => dispatch => (
 )
 
 
-export const postVoteUp = (id, newVoteScore) => ({
-  type: POST_VOTE_UP,
+export const postUpdateVote = (id, newVoteScore) => ({
+  type: POST_UPDATE_VOTE,
   payload: {
     id,
     newVoteScore

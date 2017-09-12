@@ -1,6 +1,6 @@
 import {
     RECEIVE_POSTS,
-    POST_VOTE_UP
+    POST_UPDATE_VOTE
 } from '../actions'
 
 function posts(state = {}, action) {
@@ -11,7 +11,7 @@ function posts(state = {}, action) {
                 ...action.posts
             }
 
-        case POST_VOTE_UP:
+        case POST_UPDATE_VOTE:
             const { id, newVoteScore } = action.payload
 
             /*
