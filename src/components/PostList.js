@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import sortBy from 'sort-by'
 import Moment from 'react-moment'
 import 'moment-timezone'
+import { Link } from 'react-router-dom'
 import NavigationBar from './NavigationBar'
 import AddNewPost from './AddNewPost'
 import { Glyphicon, Button } from 'react-bootstrap'
 import { capitalize } from '../utils/helpers'
 import { updateSettings, postUpdateVote } from '../actions'
+
 
 class PostList extends Component {
 
@@ -77,10 +79,10 @@ class PostList extends Component {
                                 <div className="entry">
                                     <div>
                                         <p className="title">
-                                            <a className="title" href={`${post.category}/${post.id}`}>
-                                                {post.title}</a> <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
+                                            <Link to={`${post.category}/${post.id}`} className="title"> {post.title} </Link>
+                                            <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
                                                 <Glyphicon glyph="pencil" /> Edit
-                                </Button> <Button onClick={this.onHome} bsStyle="danger" bsSize="xsmall">
+                                            </Button> <Button onClick={this.onHome} bsStyle="danger" bsSize="xsmall">
                                                 <Glyphicon glyph="trash" /> Delete </Button>
                                         </p>
                                         <p className="tagline">

@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Route, withRouter } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from '../actions'
 import PostList from './PostList'
+import DetailPage from './DetailPage'
+import '../styles/App.css'
 
 class App extends Component {
   componentDidMount() {
@@ -20,12 +22,18 @@ class App extends Component {
           <PostList showCategory='' />
         } />
 
+
         {
           categories.map(category => (
-          <Route key={category.path} path={`/${category.path}`} render={() =>
-            <PostList showCategory={category.name} />
-          } />
-        ))
+            <div key={category.path}>
+              <Route path={`/${category.path}`} exact render={() =>
+                <PostList showCategory={category.name} />
+              } />
+
+              <Route path={`/${category.path}/:postId`} component={DetailPage} />
+
+            </div>
+          ))
         }
 
       </div>
@@ -34,12 +42,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-    let categories = []
-    for (let myCat of Object.values(state.categories)) {
-        categories.push(myCat)
-    }
+  let categories = []
+  for (let myCat of Object.values(state.categories)) {
+    categories.push(myCat)
+  }
 
-    return { categories }
+  return { categories }
 }
 
 const mapDispatchToProps = (dispatch) => {
