@@ -127,6 +127,49 @@ ol, ul {
 }
 
 
+/**** Detail Page **/
+
+.detail-title {
+    color: dodgerblue;
+    font-weight: bold;
+    font-size: x-large;
+    margin-bottom: 0px;
+}
+
+.detail-tagline {
+    color: #888;
+    font-size: smaller;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.detail-comment-header {
+    color: #708090;
+    font-size: medium;
+    border-bottom: 1px dotted gray;
+}
+
+.btn-xxsmall {
+    padding: 1px 5px;
+    font-size: 8px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.my-comment-votescore {
+    text-align: center;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: inherit;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.comment-item {
+    min-height: 60px;
+}
+
 /***
     NavBar Styles
 

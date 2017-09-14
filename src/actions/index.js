@@ -4,10 +4,13 @@ import { normalize } from 'normalizr';
 import { categorySchema, postSchema, commentSchema } from '../schemas';
 
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
+
 export const RECEIVE_POSTS = "RECEIVE_POSTS"
-export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
-export const UPDATE_SETTINGS = "UPDATE_SETTINGS"
 export const POST_UPDATE_VOTE = "POST_UPDATE_VOTE"
+
+export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
+export const COMMENT_UPDATE_VOTE = "COMMENT_UPDATE_VOTE"
+export const UPDATE_SETTINGS = "UPDATE_SETTINGS"
 
 
 export const updateSettings = (key, value) => ({
@@ -16,6 +19,20 @@ export const updateSettings = (key, value) => ({
   value
 })
 
+
+export const commentUpdateVote = (id, mechanism) => {
+
+  //update comment API
+  ReadableAPI.commentVote(id, mechanism)
+
+  return {
+    type: COMMENT_UPDATE_VOTE,
+    payload: {
+      id,
+      mechanism
+    }
+  }
+}
 
 export const receiveComments = comments => ({
   type: RECEIVE_COMMENTS,
@@ -42,13 +59,19 @@ export const fetchComments = (postId) => dispatch => (
 )
 
 
-export const postUpdateVote = (id, newVoteScore) => ({
-  type: POST_UPDATE_VOTE,
-  payload: {
-    id,
-    newVoteScore
+export const postUpdateVote = (id, mechanism) => {
+
+  //update post API
+  ReadableAPI.postVote(id, mechanism)
+
+  return {
+    type: POST_UPDATE_VOTE,
+    payload: {
+      id,
+      mechanism
+    }
   }
-})
+}
 
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,

@@ -2,6 +2,8 @@ import {
     RECEIVE_POSTS,
     POST_UPDATE_VOTE
 } from '../actions'
+import * as CONSTANTS from '../constants'
+
 
 function posts(state = {}, action) {
     switch (action.type) {
@@ -12,21 +14,22 @@ function posts(state = {}, action) {
             }
 
         case POST_UPDATE_VOTE:
-            const { id, newVoteScore } = action.payload
-
-            /*
-            // spread syntax version
-            return {
-                ...state,
-                [id]: {
-                    ...state[id],
-                    voteScore: newVoteScore,
-                },
-            }
-            */
+            const { id, mechanism } = action.payload
 
             const updatedPost = state[id]
-            updatedPost.voteScore = newVoteScore
+
+            switch (mechanism) {
+                case CONSTANTS.UP_VOTE:
+                    updatedPost.voteScore = updatedPost.voteScore + 1
+                    break
+
+                case CONSTANTS.DOWN_VOTE:
+                    updatedPost.voteScore = updatedPost.voteScore - 1
+                    break
+
+                default:
+                    updatedPost.voteScore = updatedPost.voteScore + 1
+            }
 
             return {
                 ...state,

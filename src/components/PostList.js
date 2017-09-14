@@ -9,6 +9,7 @@ import AddNewPost from './AddNewPost'
 import { Glyphicon, Button } from 'react-bootstrap'
 import { capitalize } from '../utils/helpers'
 import { updateSettings, postUpdateVote } from '../actions'
+import * as CONSTANTS from '../constants'
 
 
 class PostList extends Component {
@@ -62,7 +63,7 @@ class PostList extends Component {
                                 <div className="midcol">
                                     <div tabIndex="0" title="Vote Up">
                                         <Button bsStyle="success" bsSize="xsmall"
-                                            onClick={() => votePost(post.id, (post.voteScore + 1))}
+                                            onClick={() => votePost(post.id, CONSTANTS.UP_VOTE)}
                                         >
                                             <Glyphicon glyph="thumbs-up" />
                                         </Button>
@@ -70,7 +71,7 @@ class PostList extends Component {
                                     <div className="my-post-votescore" title={`${post.voteScore} Vote Score`}>{post.voteScore}</div>
                                     <div tabIndex="0" title="Vote Down">
                                         <Button bsStyle="info" bsSize="xsmall"
-                                            onClick={() => votePost(post.id, (post.voteScore - 1))}
+                                            onClick={() => votePost(post.id, CONSTANTS.DOWN_VOTE)}
                                         >
                                             <Glyphicon glyph="thumbs-down" />
                                         </Button>
