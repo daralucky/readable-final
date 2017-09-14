@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import sortBy from 'sort-by'
+import { Redirect } from 'react-router-dom'
 import { Button, Glyphicon } from 'react-bootstrap'
 import Moment from 'react-moment'
 import 'moment-timezone'
-import { postUpdateVote, commentUpdateVote } from '../actions'
+import { postUpdateVote, commentUpdateVote, commentDelete } from '../actions'
 import NavigationBar from './NavigationBar'
 import * as CONSTANTS from '../constants'
 import Confirm from 'react-confirm-bootstrap'
+import DeletePost from './DeletePost'
 
 class DetailPage extends Component {
-    onConfirmDeletePost() {
-        // Preform your action.
-        console.log('Delete Post Confirmed !')
-    }
 
-    onConfirmDeleteComment() {
+    onConfirmDeleteComment(id) {
         // Preform your action.
         console.log('Deleting COMMENT ...')
-
+        this.props.deleteComment(id)
     }
 
     render() {
@@ -32,17 +30,26 @@ class DetailPage extends Component {
 
         const currentPost = posts[postId]
 
-        const currentComments = comments.filter(c => c.parentId === currentPost.id).sort(sortBy('-voteScore'))
+        const currentComments = comments.filter(c =>
+            c.parentId === currentPost.id
+            && c.deleted === false
+            && c.parentDeleted === false).sort(sortBy('-voteScore'))
 
 
         return (
             <div>
+
                 <NavigationBar />
 
                 {currentPost && (
 
-                    <div id='detail-block'>
 
+                    < div id='detail-block'>
+                        {//prevent deleted post from showing
+                            currentPost.deleted && (
+                                <Redirect to='/' />
+                            )
+                        }
                         <div key={currentPost.id}>
                             <div className="midcol">
                                 <div tabIndex="0" title="Vote Up">
@@ -66,21 +73,7 @@ class DetailPage extends Component {
                                     <p className="detail-title">
                                         {currentPost.title} <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
                                             <Glyphicon glyph="pencil" /> Edit
-                                            </Button> <Confirm
-                                            onConfirm={this.onConfirmDeletePost}
-                                            body="Are you sure you want to delete this post?"
-                                            confirmText="Confirm Delete"
-                                            title="Deleting Post">
-                                            <Button bsStyle="danger" bsSize="xsmall">
-                                                <Glyphicon glyph="trash" /> Delete </Button>
-                                        </Confirm>
-
-
-
-
-
-
-
+                                            </Button> <DeletePost postId={currentPost.id} needRedirection={true} />
                                     </p>
                                     <p className="detail-tagline">
                                         submitted on <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">
@@ -124,7 +117,7 @@ class DetailPage extends Component {
                                                                     </Moment>
                                                                     ) </span>
                                                                 <a href='#edit'>edit </a> | <Confirm
-                                                                    onConfirm={this.onConfirmDeleteComment}
+                                                                    onConfirm={() => this.onConfirmDeleteComment(comment.id)}
                                                                     body="Are you sure you want to delete this comment?"
                                                                     confirmText="Confirm Delete"
                                                                     title="Deleting Comment">
@@ -148,7 +141,8 @@ class DetailPage extends Component {
 
 
                     </div>
-                )}
+                )
+                }
 
             </div>
         )
@@ -175,7 +169,8 @@ const mapDispatchToProps = dispatch => {
     return {
         //changeSettings: (key, value) => dispatch(updateSettings(key, value)),
         votePost: (postId, newSore) => (dispatch(postUpdateVote(postId, newSore))),
-        voteComment: (commentId, newSore) => (dispatch(commentUpdateVote(commentId, newSore)))
+        voteComment: (commentId, newSore) => (dispatch(commentUpdateVote(commentId, newSore))),
+        deleteComment: (id) => (dispatch(commentDelete(id)))
     }
 }
 

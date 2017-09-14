@@ -10,22 +10,24 @@ import { Glyphicon, Button } from 'react-bootstrap'
 import { capitalize } from '../utils/helpers'
 import { updateSettings, postUpdateVote } from '../actions'
 import * as CONSTANTS from '../constants'
-
+import DeletePost from './DeletePost'
 
 class PostList extends Component {
 
     countPostComments = postId => {
-        let counter = this.props.comments.filter(c => c.parentId === postId)
-            .reduce((accumulator, currentValue) => {
-                return accumulator + 1
-            }, 0)
-        return counter
+        let count = this.props.comments.filter(c =>
+            c.parentId === postId
+            && c.deleted === false
+            && c.parentDeleted === false
+        ).length
+
+        return count
     }
 
     render() {
         const { posts, showCategory, settings, changeSettings, votePost } = this.props
 
-        let myPosts = posts.sort(sortBy(settings.orderPost))
+        let myPosts = posts.filter(p => p.deleted === false).sort(sortBy(settings.orderPost))
 
         //console.log("showCategory: " + JSON.stringify(showCategory))
         //filter posts by category
@@ -83,8 +85,7 @@ class PostList extends Component {
                                             <Link to={`${post.category}/${post.id}`} className="title"> {post.title} </Link>
                                             <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
                                                 <Glyphicon glyph="pencil" /> Edit
-                                            </Button> <Button onClick={this.onHome} bsStyle="danger" bsSize="xsmall">
-                                                <Glyphicon glyph="trash" /> Delete </Button>
+                                            </Button> <DeletePost postId={post.id} needRedirection={false} />
                                         </p>
                                         <p className="tagline">
                                             submitted on <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">

@@ -22,7 +22,6 @@ class App extends Component {
           <PostList showCategory='' />
         } />
 
-
         {
           categories.map(category => (
             <div key={category.path}>

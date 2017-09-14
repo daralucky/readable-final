@@ -7,9 +7,13 @@ export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
 
 export const RECEIVE_POSTS = "RECEIVE_POSTS"
 export const POST_UPDATE_VOTE = "POST_UPDATE_VOTE"
+export const POST_DELETE = "POST_DELETE"
 
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
 export const COMMENT_UPDATE_VOTE = "COMMENT_UPDATE_VOTE"
+export const COMMENT_DELETE = "COMMENT_DELETE"
+export const COMMENT_PARENT_DELETED = "COMMENT_PARENT_DELETED"
+
 export const UPDATE_SETTINGS = "UPDATE_SETTINGS"
 
 
@@ -20,8 +24,30 @@ export const updateSettings = (key, value) => ({
 })
 
 
-export const commentUpdateVote = (id, mechanism) => {
 
+export const commentParentDeleted = (id) => {
+
+  return {
+    type: COMMENT_PARENT_DELETED,
+    payload: {
+      id
+    }
+  }
+}
+
+export const commentDelete = (id) => {
+  //delete comment from API
+  ReadableAPI.commentDelete(id)
+
+  return {
+    type: COMMENT_DELETE,
+    payload: {
+      id
+    }
+  }
+}
+
+export const commentUpdateVote = (id, mechanism) => {
   //update comment API
   ReadableAPI.commentVote(id, mechanism)
 
@@ -58,6 +84,25 @@ export const fetchComments = (postId) => dispatch => (
     })
 )
 
+export const postUpdateChildrenComment = (children) => dispatch => (
+   children.map( child => dispatch(commentParentDeleted(child)))
+)
+  /*
+export const postUpdateChildrenComment = children => {
+  children.map( child => commentParentDeleted(child))
+}
+*/
+export const postDelete = (id) => {
+  //delete post from API
+  ReadableAPI.postDelete(id)
+
+  return {
+    type: POST_DELETE,
+    payload: {
+      id
+    }
+  }
+}
 
 export const postUpdateVote = (id, mechanism) => {
 

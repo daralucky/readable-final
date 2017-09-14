@@ -42,6 +42,14 @@ export const postVote = (id, option) =>
     body: JSON.stringify({ option })
   }).then(res => res.json())
 
+//delete Post
+export const postDelete = (id) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }})
 
 
 //Comments
@@ -61,4 +69,13 @@ export const commentVote = (id, option) =>
     },
     body: JSON.stringify({ option })
   }).then(res => res.json())
+
+//delete comment
+export const commentDelete = (id) =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }}).then(res => res.json())
 

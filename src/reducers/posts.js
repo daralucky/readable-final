@@ -1,6 +1,7 @@
 import {
     RECEIVE_POSTS,
-    POST_UPDATE_VOTE
+    POST_UPDATE_VOTE,
+    POST_DELETE
 } from '../actions'
 import * as CONSTANTS from '../constants'
 
@@ -35,6 +36,16 @@ function posts(state = {}, action) {
                 ...state,
                 [id]: updatedPost
             }
+
+            case POST_DELETE:
+            const deletedPost = state[action.payload.id]
+            deletedPost.deleted = true
+            return {
+                ...state,
+                [action.payload.id]: deletedPost
+            }
+
+
 
         default:
             return state

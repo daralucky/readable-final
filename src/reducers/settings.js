@@ -3,7 +3,8 @@ import {
 } from '../actions'
 
 const initialState = {
-    orderPost: '-voteScore'
+    orderPost: '-voteScore',
+    redirectFromPost: false
 }
 
 function settings(state = initialState, action) {
