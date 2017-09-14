@@ -7,8 +7,20 @@ import 'moment-timezone'
 import { postUpdateVote, commentUpdateVote } from '../actions'
 import NavigationBar from './NavigationBar'
 import * as CONSTANTS from '../constants'
+import Confirm from 'react-confirm-bootstrap'
 
 class DetailPage extends Component {
+    onConfirmDeletePost() {
+        // Preform your action.
+        console.log('Delete Post Confirmed !')
+    }
+
+    onConfirmDeleteComment() {
+        // Preform your action.
+        console.log('Deleting COMMENT ...')
+
+    }
+
     render() {
 
         const postId = this.props.match.params.postId
@@ -54,8 +66,21 @@ class DetailPage extends Component {
                                     <p className="detail-title">
                                         {currentPost.title} <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
                                             <Glyphicon glyph="pencil" /> Edit
-                                            </Button> <Button onClick={this.onHome} bsStyle="danger" bsSize="xsmall">
-                                            <Glyphicon glyph="trash" /> Delete </Button>
+                                            </Button> <Confirm
+                                            onConfirm={this.onConfirmDeletePost}
+                                            body="Are you sure you want to delete this post?"
+                                            confirmText="Confirm Delete"
+                                            title="Deleting Post">
+                                            <Button bsStyle="danger" bsSize="xsmall">
+                                                <Glyphicon glyph="trash" /> Delete </Button>
+                                        </Confirm>
+
+
+
+
+
+
+
                                     </p>
                                     <p className="detail-tagline">
                                         submitted on <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">
@@ -98,7 +123,13 @@ class DetailPage extends Component {
                                                                         {comment.timestamp}
                                                                     </Moment>
                                                                     ) </span>
-                                                                <a href='#edit'>edit </a> | <a href='#delete'> delete </a>
+                                                                <a href='#edit'>edit </a> | <Confirm
+                                                                    onConfirm={this.onConfirmDeleteComment}
+                                                                    body="Are you sure you want to delete this comment?"
+                                                                    confirmText="Confirm Delete"
+                                                                    title="Deleting Comment">
+                                                                    <a href='#delete'> delete </a>
+                                                                </Confirm>
                                                             </p>
                                                             <p style={{ fontSize: '12px' }}>
                                                                 {comment.body}
@@ -123,34 +154,6 @@ class DetailPage extends Component {
         )
     }
 }
-
-
-const MyLargeModal = React.createClass({
-  render() {
-    return (
-      <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h4>Wrapped Text</h4>
-          <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-          <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-          <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-          <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-          <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-          <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-})
 
 
 
