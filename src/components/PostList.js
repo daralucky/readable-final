@@ -87,16 +87,16 @@ class PostList extends Component {
                                                 <Glyphicon glyph="trash" /> Delete </Button>
                                         </p>
                                         <p className="tagline">
-                                            submitted on <Moment unix tz="Asia/Phnom_Penh">
+                                            submitted on <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">
                                                 {post.timestamp}
                                             </Moment> by {post.author}
                                         </p>
                                         <ul className="flat-list buttons">
                                             <li>
-                                                <a href="#mylink" rel="nofollow" className="deco-none">{this.countPostComments(post.id)} comments</a>
+                                                <Link to={`${post.category}/${post.id}#comments`} className="deco-none"> {this.countPostComments(post.id)} comments </Link>
                                             </li>
                                             <li>
-                                                <a href='/redux'>posted in {capitalize(post.category)}</a>
+                                                <Link to={`/${post.category}`}> posted in {capitalize(post.category)} </Link>
                                             </li>
                                         </ul>
                                     </div>

@@ -58,54 +58,57 @@ class DetailPage extends Component {
                                             <Glyphicon glyph="trash" /> Delete </Button>
                                     </p>
                                     <p className="detail-tagline">
-                                        submitted on <Moment unix tz="Asia/Phnom_Penh">
+                                        submitted on <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">
                                             {currentPost.timestamp}
                                         </Moment> by {currentPost.author}
                                     </p>
                                     <p style={{ marginBottom: '20px' }}>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                        {currentPost.body}
                                     </p>
 
-                                    <div id='comments-block'>
-                                        <div className="detail-comment-header">
-                                            {currentComments.length} Comments: <span className="pull-right"><Button onClick={this.onHome} bsStyle="success" bsSize="xsmall">
-                                                <Glyphicon glyph="plus" /> Add New Comment
+                                    <section id='comments'>
+                                        <div id='comments-block'>
+                                            <div className="detail-comment-header">
+                                                {currentComments.length} Comments: <span className="pull-right"><Button onClick={this.onHome} bsStyle="success" bsSize="xsmall">
+                                                    <Glyphicon glyph="plus" /> Add New Comment
                                             </Button></span>
-                                        </div>
-
-                                        {currentComments.map((comment) => (
-                                            <div key={comment.id} className="comment-item">
-                                                <div className="midcol">
-                                                    <div tabIndex="0" title="Vote Up">
-                                                        <button type="button" className="btn btn-xxsmall btn-success" onClick={() => voteComment(comment.id, CONSTANTS.UP_VOTE)}>
-                                                            <span className="glyphicon glyphicon-thumbs-up"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div className="my-comment-votescore" title={`${comment.voteScore} Vote Score`}>{comment.voteScore}</div>
-                                                    <div tabIndex="0" title="Vote Down">
-                                                        <button type="button" className="btn btn-xxsmall btn-info" onClick={() => voteComment(comment.id, CONSTANTS.DOWN_VOTE)}>
-                                                            <span className="glyphicon glyphicon-thumbs-down"></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div className="entry">
-                                                    <div>
-                                                        <p style={{ marginBottom: '0px' }}>
-                                                            <span style={{ fontWeight: 'bold' }}>{comment.author} </span>
-                                                            <span style={{ fontSize: 'smaller', color: '#888' }}> ({comment.timestamp}) </span>
-                                                            <a href='#edit'>edit </a> | <a href='#delete'> delete </a>
-                                                        </p>
-                                                        <p style={{ fontSize: '12px' }}>
-                                                            {comment.body}
-                                                        </p>
-                                                    </div>
-                                                </div>
                                             </div>
-                                        ))}
 
-
-                                    </div>
-
+                                            {currentComments.map((comment) => (
+                                                <div key={comment.id} className="comment-item">
+                                                    <div className="midcol">
+                                                        <div tabIndex="0" title="Vote Up">
+                                                            <button type="button" className="btn btn-xxsmall btn-success" onClick={() => voteComment(comment.id, CONSTANTS.UP_VOTE)}>
+                                                                <span className="glyphicon glyphicon-thumbs-up"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="my-comment-votescore" title={`${comment.voteScore} Vote Score`}>{comment.voteScore}</div>
+                                                        <div tabIndex="0" title="Vote Down">
+                                                            <button type="button" className="btn btn-xxsmall btn-info" onClick={() => voteComment(comment.id, CONSTANTS.DOWN_VOTE)}>
+                                                                <span className="glyphicon glyphicon-thumbs-down"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="entry">
+                                                        <div>
+                                                            <p style={{ marginBottom: '0px' }}>
+                                                                <span style={{ fontWeight: 'bold' }}>{comment.author} </span>
+                                                                <span style={{ fontSize: 'smaller', color: '#888' }}> (
+                                                                    <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">
+                                                                        {comment.timestamp}
+                                                                    </Moment>
+                                                                    ) </span>
+                                                                <a href='#edit'>edit </a> | <a href='#delete'> delete </a>
+                                                            </p>
+                                                            <p style={{ fontSize: '12px' }}>
+                                                                {comment.body}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
 
                                 </div>
                             </div>
@@ -120,6 +123,36 @@ class DetailPage extends Component {
         )
     }
 }
+
+
+const MyLargeModal = React.createClass({
+  render() {
+    return (
+      <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Wrapped Text</h4>
+          <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+          <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+          <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+})
+
+
 
 
 const mapStateToProps = state => {
