@@ -7,19 +7,11 @@ import { Button, Glyphicon } from 'react-bootstrap'
 
 class DeletePost extends Component {
 
-    /*
-    componentDidMount() {
-        this.props.changeSettings('redirectFromPost', false)
-    }
-    */
-
-
     componentWillMount() {
         this.props.redirectFromPost && (
             this.props.changeSettings('redirectFromPost', false)
         )
     }
-
 
     onConfirmDeletePost(id) {
         // Preform your action.
@@ -28,7 +20,7 @@ class DeletePost extends Component {
 
         let relatedComments = this.props.comments.filter(c => c.parentId === id)
         relatedComments = relatedComments.map( c => c.id)
-        console.log('relatedComments: ' + JSON.stringify(relatedComments))
+        //console.log('relatedComments: ' + JSON.stringify(relatedComments))
         this.props.updateChildComments(relatedComments)
 
         //redirect
@@ -40,7 +32,6 @@ class DeletePost extends Component {
 
     render() {
         const { postId, redirectFromPost, needRedirection } = this.props
-        //console.log(JSON.stringify(postId))
 
         return (
             <span>
@@ -52,8 +43,6 @@ class DeletePost extends Component {
                     <Button bsStyle="danger" bsSize="xsmall">
                         <Glyphicon glyph="trash" /> Delete </Button>
                 </Confirm>
-
-                {console.log('redirectFromPost: ' + JSON.stringify(redirectFromPost))}
 
                 {needRedirection && (
                     redirectFromPost && (

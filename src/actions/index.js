@@ -87,11 +87,7 @@ export const fetchComments = (postId) => dispatch => (
 export const postUpdateChildrenComment = (children) => dispatch => (
    children.map( child => dispatch(commentParentDeleted(child)))
 )
-  /*
-export const postUpdateChildrenComment = children => {
-  children.map( child => commentParentDeleted(child))
-}
-*/
+
 export const postDelete = (id) => {
   //delete post from API
   ReadableAPI.postDelete(id)
