@@ -6,6 +6,8 @@ import PostList from './PostList'
 import DetailPage from './DetailPage'
 import '../styles/App.css'
 
+import AddNewPostPage from './AddNewPostPage'
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchCat()
@@ -17,6 +19,8 @@ class App extends Component {
 
     return (
       <div id="App" className="container">
+
+        <Route path='/add-new-post' exact component={AddNewPostPage} />
 
         <Route path='/' exact render={() =>
           <PostList showCategory='' />

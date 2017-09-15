@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class AddNewPost extends Component {
     render() {
         return (
             <div id='add-new-post-block'>
                 <p style={{ textAlign: 'center' }}>
-                    <a href='#addNewPost'>ADD NEW POST</a>
+
+                    <Link to='/add-new-post'>ADD NEW POST</Link>
                 </p>
             </div>
         )

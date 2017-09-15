@@ -170,6 +170,17 @@ ol, ul {
     min-height: 60px;
 }
 
+
+/**** Form Styles **/
+.help-block {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
 /***
     NavBar Styles
 

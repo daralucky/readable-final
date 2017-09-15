@@ -46,7 +46,7 @@ class DeletePost extends Component {
 
                 {needRedirection && (
                     redirectFromPost && (
-                        <Redirect to='/' />
+                        <Redirect to='/udacity' />
                     )
                 )}
             </span>
