@@ -10,6 +10,7 @@ export const RECEIVE_POSTS = "RECEIVE_POSTS"
 export const POST_UPDATE_VOTE = "POST_UPDATE_VOTE"
 export const POST_DELETE = "POST_DELETE"
 export const POST_ADD_NEW = "POST_ADD_NEW"
+export const POST_EDIT = "POST_EDIT"
 
 
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
@@ -87,7 +88,20 @@ export const fetchComments = (postId) => dispatch => (
     })
 )
 
+export const postEdit = (editedPost) => {
 
+  //add new post to API
+  ReadableAPI.addNewPost(editedPost.id, editedPost.timestamp, editedPost.title, editedPost.body, editedPost.author, editedPost.category)
+
+  return {
+    type: POST_EDIT,
+    payload: {
+      editedPost
+    }
+  }
+
+
+}
 
 export const postAddNew = (values) => {
   //console.log('UUID v4: ' + JSON.stringify(UUID.v4(), null, 2))

@@ -11,6 +11,7 @@ import { capitalize } from '../utils/helpers'
 import { updateSettings, postUpdateVote } from '../actions'
 import * as CONSTANTS from '../constants'
 import DeletePost from './DeletePost'
+import EditPost from './EditPost'
 
 class PostList extends Component {
 
@@ -90,9 +91,9 @@ class PostList extends Component {
                                     <div>
                                         <p className="title">
                                             <Link to={`${post.category}/${post.id}`} className="title"> {post.title} </Link>
-                                            <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
-                                                <Glyphicon glyph="pencil" /> Edit
-                                            </Button> <DeletePost postId={post.id} needRedirection={false} />
+                                            <EditPost postId={post.id} caller={this.props.location.pathname} />
+                                            {' '}
+                                            <DeletePost postId={post.id} needRedirection={false} />
                                         </p>
                                         <p className="tagline">
                                             submitted on <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">

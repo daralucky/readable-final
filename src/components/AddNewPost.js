@@ -6,7 +6,7 @@ const AddNewPost = (props) => (
     <span className="pull-right">
         <Link to={{
             pathname: '/add-new-post',
-            hash: `#${props.caller}`
+            caller: props.caller
         }}>
             <Button bsStyle="success" bsSize="sm"><Glyphicon glyph="plus" /> Add Post </Button>
         </Link>

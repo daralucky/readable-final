@@ -10,6 +10,7 @@ import NavigationBar from './NavigationBar'
 import * as CONSTANTS from '../constants'
 import Confirm from 'react-confirm-bootstrap'
 import DeletePost from './DeletePost'
+import EditPost from './EditPost'
 
 class DetailPage extends Component {
 
@@ -71,9 +72,11 @@ class DetailPage extends Component {
                             <div className="entry">
                                 <div>
                                     <p className="detail-title">
-                                        {currentPost.title} <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
-                                            <Glyphicon glyph="pencil" /> Edit
-                                            </Button> <DeletePost postId={currentPost.id} needRedirection={true} caller={currentPost.category} />
+                                        {currentPost.title}
+                                        {' '}
+                                        <EditPost postId={currentPost.id} caller={this.props.location.pathname} />
+                                        {' '}
+                                        <DeletePost postId={currentPost.id} needRedirection={true} caller={currentPost.category} />
                                     </p>
                                     <p className="detail-tagline">
                                         submitted on <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">

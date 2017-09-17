@@ -5,7 +5,9 @@ import {
 const initialState = {
     orderPost: '-voteScore',
     redirectFromDeletePost: false,
-    redirectFromAddNewPost: false
+    redirectFromAddNewPost: false,
+    redirectFromEditPost: false,
+
 }
 
 function settings(state = initialState, action) {

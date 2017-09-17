@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { postAddNew, updateSettings } from '../actions'
+import { postEdit, updateSettings } from '../actions'
 import { capitalize } from '../utils/helpers'
 import PostForm from './PostForm'
 import NavigationBar from './NavigationBar'
 
-class AddNewPostPage extends Component {
+class EditPostPage extends Component {
 
     /**
      * It is done this way becuase the assigment need all state to be managed by the Store.
@@ -29,15 +29,19 @@ class AddNewPostPage extends Component {
 
     mySubmitHandler(values) {
         //console.log('my handler:: ' + JSON.stringify(values, null, 2))
-        this.props.addPost(values)
+        this.props.editPost(values)
 
         //change redirect State in the Store
         this.props.changeSettings('redirectFromEditPost', true)
     }
 
     render() {
-        const { isRedirectBack, categories } = this.props
-        //console.log('AddNewPostPage:: ' + JSON.stringify(this.props, null, 2))
+        const postId = this.props.match.params.postId
+        const { isRedirectBack, posts, categories } = this.props
+
+        const currentPost = posts[postId]
+
+        //console.log('EditPost:: ' + JSON.stringify(this.props, null, 2))
 
         const redirectPath = this.props.location.caller ? this.props.location.caller : '/'
         //console.log('redirectPath:: ' + JSON.stringify(redirectPath, null, 2))
@@ -48,11 +52,12 @@ class AddNewPostPage extends Component {
 
                 <div className="my-post-list-page-header">
                     <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}>
-                        Add New Post
+                        Edit Post
                     </span>
                 </div>
 
                 <PostForm
+                    initialValues={currentPost}
                     categoryOptions={categories}
                     onSubmit={values => this.mySubmitHandler(values)}
                 />
@@ -61,6 +66,7 @@ class AddNewPostPage extends Component {
                     isRedirectBack && (
                         <Redirect to={redirectPath} />
                     )
+
                 }
 
             </div>
@@ -78,17 +84,18 @@ const mapStateToProps = (state) => {
 
     return {
         categories,
-        isRedirectBack: state.settings.redirectFromAddNewPost
+        posts: state.posts,
+        isRedirectBack: state.settings.redirectFromEditPost
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addPost: (value) => (dispatch(postAddNew(value))),
+        editPost: (value) => (dispatch(postEdit(value))),
         changeSettings: (key, value) => dispatch(updateSettings(key, value)),
     }
 }
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AddNewPostPage)
+)(EditPostPage)

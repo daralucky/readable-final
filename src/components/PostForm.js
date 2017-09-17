@@ -22,7 +22,7 @@ const alphaNumeric = value =>
     ? 'Only alphanumeric characters'
     : undefined
 
-const AddNewPostForm = props => {
+const PostForm = props => {
   const { handleSubmit, pristine, reset, submitting, categoryOptions } = props
 
   return (
@@ -73,5 +73,5 @@ const AddNewPostForm = props => {
 }
 
 export default reduxForm({
-  form: 'addNewPost' // a unique identifier for this form
-})(AddNewPostForm)
+  form: 'postForm' // a unique identifier for this form
+})(PostForm)

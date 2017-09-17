@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Route, withRouter } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from '../actions'
+import '../styles/App.css'
 import PostList from './PostList'
 import DetailPage from './DetailPage'
-import '../styles/App.css'
+import EditPostPage from './EditPostPage'
 
 import AddNewPostPage from './AddNewPostPage'
 
@@ -21,6 +22,8 @@ class App extends Component {
       <div id="App" className="container">
 
         <Route path='/add-new-post' exact component={AddNewPostPage} />
+
+        <Route path='/edit-post/:postId' component={EditPostPage} />
 
         <Route path='/' exact render={() =>
           <PostList showCategory='' />

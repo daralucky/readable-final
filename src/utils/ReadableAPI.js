@@ -33,25 +33,36 @@ export const getPostsById = (Id) =>
 
 //add new Post
 export const addNewPost = (id, timestamp, title, body, author, category) =>
-fetch(`${api}/posts`, {
-  method: 'POST',
-  headers: {
-    ...headers,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ id, timestamp, title, body, author, category })
-}).then(res => res.json())
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id, timestamp, title, body, author, category })
+  }).then(res => res.json())
+
+//edit Post
+export const editPost = (id, timestamp, title, body, author, category) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ timestamp, title, body, author, category })
+  }).then(res => res.json())
 
 //vote Post
 export const postVote = (id, option) =>
-fetch(`${api}/posts/${id}`, {
-  method: 'POST',
-  headers: {
-    ...headers,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ option })
-}).then(res => res.json())
+  fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option })
+  }).then(res => res.json())
 
 //delete Post
 export const postDelete = (id) =>
@@ -60,7 +71,8 @@ export const postDelete = (id) =>
     headers: {
       ...headers,
       'Content-Type': 'application/json'
-    }})
+    }
+  })
 
 
 //Comments
@@ -88,5 +100,6 @@ export const commentDelete = (id) =>
     headers: {
       ...headers,
       'Content-Type': 'application/json'
-    }}).then(res => res.json())
+    }
+  }).then(res => res.json())
 

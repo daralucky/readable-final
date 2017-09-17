@@ -2,7 +2,8 @@ import {
     RECEIVE_POSTS,
     POST_UPDATE_VOTE,
     POST_DELETE,
-    POST_ADD_NEW
+    POST_ADD_NEW,
+    POST_EDIT
 } from '../actions'
 import * as CONSTANTS from '../constants'
 
@@ -52,6 +53,14 @@ function posts(state = {}, action) {
             return {
                 ...state,
                 [newPost.id]: newPost
+            }
+
+        case POST_EDIT:
+            const { editedPost } = action.payload
+            //console.log('POST_EDIT: ' + JSON.stringify(action.payload, null, 2))
+            return {
+                ...state,
+                [editedPost.id]: editedPost
             }
 
 
