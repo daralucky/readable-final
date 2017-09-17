@@ -14,7 +14,7 @@ class AddNewPostPage extends Component {
      */
     componentWillMount() {
         this.props.isRedirectBack && (
-            this.props.changeSettings('redirectFromEditPost', false)
+            this.props.changeSettings('redirectFromAddNewPost', false)
         )
     }
 
@@ -23,7 +23,7 @@ class AddNewPostPage extends Component {
      * Normally, this can be handle by component own state
      */    componentWillUnmount() {
         this.props.isRedirectBack && (
-            this.props.changeSettings('redirectFromEditPost', false)
+            this.props.changeSettings('redirectFromAddNewPost', false)
         )
     }
 
@@ -32,7 +32,7 @@ class AddNewPostPage extends Component {
         this.props.addPost(values)
 
         //change redirect State in the Store
-        this.props.changeSettings('redirectFromEditPost', true)
+        this.props.changeSettings('redirectFromAddNewPost', true)
     }
 
     render() {
