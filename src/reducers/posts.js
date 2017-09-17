@@ -1,7 +1,8 @@
 import {
     RECEIVE_POSTS,
     POST_UPDATE_VOTE,
-    POST_DELETE
+    POST_DELETE,
+    POST_ADD_NEW
 } from '../actions'
 import * as CONSTANTS from '../constants'
 
@@ -37,7 +38,7 @@ function posts(state = {}, action) {
                 [id]: updatedPost
             }
 
-            case POST_DELETE:
+        case POST_DELETE:
             const deletedPost = state[action.payload.id]
             deletedPost.deleted = true
             return {
@@ -45,6 +46,13 @@ function posts(state = {}, action) {
                 [action.payload.id]: deletedPost
             }
 
+        case POST_ADD_NEW:
+            const { newPost } = action.payload
+            // console.log('POST_ADD_NEW: ' + JSON.stringify(action.payload, null, 2))
+            return {
+                ...state,
+                [newPost.id]: newPost
+            }
 
 
         default:

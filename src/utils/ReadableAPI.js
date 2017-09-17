@@ -31,16 +31,27 @@ export const getPostsById = (Id) =>
   fetch(`${api}/posts/${Id}`, { headers })
     .then(res => res.json())
 
+//add new Post
+export const addNewPost = (id, timestamp, title, body, author, category) =>
+fetch(`${api}/posts`, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ id, timestamp, title, body, author, category })
+}).then(res => res.json())
+
 //vote Post
 export const postVote = (id, option) =>
-  fetch(`${api}/posts/${id}`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ option })
-  }).then(res => res.json())
+fetch(`${api}/posts/${id}`, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ option })
+}).then(res => res.json())
 
 //delete Post
 export const postDelete = (id) =>

@@ -88,7 +88,7 @@ class DetailPage extends Component {
                                         <div id='comments-block'>
                                             <div className="detail-comment-header">
                                                 {currentComments.length} Comments: <span className="pull-right"><Button onClick={this.onHome} bsStyle="success" bsSize="xsmall">
-                                                    <Glyphicon glyph="plus" /> Add New Comment
+                                                    <Glyphicon glyph="plus" /> Add Comment
                                             </Button></span>
                                             </div>
 
@@ -179,6 +179,3 @@ export default connect(
     mapDispatchToProps
 )(DetailPage)
 
-
-
-//export default DetailPage

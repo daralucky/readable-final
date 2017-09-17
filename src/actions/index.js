@@ -1,13 +1,16 @@
 import * as ReadableAPI from '../utils/ReadableAPI'
-
 import { normalize } from 'normalizr';
+import * as UUID from 'uuid'
 import { categorySchema, postSchema, commentSchema } from '../schemas';
+import { getEpoch } from '../utils/helpers'
 
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
 
 export const RECEIVE_POSTS = "RECEIVE_POSTS"
 export const POST_UPDATE_VOTE = "POST_UPDATE_VOTE"
 export const POST_DELETE = "POST_DELETE"
+export const POST_ADD_NEW = "POST_ADD_NEW"
+
 
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
 export const COMMENT_UPDATE_VOTE = "COMMENT_UPDATE_VOTE"
@@ -84,8 +87,32 @@ export const fetchComments = (postId) => dispatch => (
     })
 )
 
+
+
+export const postAddNew = (values) => {
+  //console.log('UUID v4: ' + JSON.stringify(UUID.v4(), null, 2))
+  //console.log('getEpoch: ' + JSON.stringify(getEpoch(), null, 2))
+  const newPost = {
+    'id': UUID.v4(),
+    'timestamp': getEpoch(),
+    ...values,
+    voteScore: 1,
+    deleted: false
+  }
+
+  //add new post to API
+  ReadableAPI.addNewPost(newPost.id, newPost.timestamp, newPost.title, newPost.body, newPost.author, newPost.category)
+
+  return {
+    type: POST_ADD_NEW,
+    payload: {
+      newPost
+    }
+  }
+}
+
 export const postUpdateChildrenComment = (children) => dispatch => (
-   children.map( child => dispatch(commentParentDeleted(child)))
+  children.map(child => dispatch(commentParentDeleted(child)))
 )
 
 export const postDelete = (id) => {

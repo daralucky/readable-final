@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import sortBy from 'sort-by'
 import Moment from 'react-moment'
 import 'moment-timezone'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import NavigationBar from './NavigationBar'
 import AddNewPost from './AddNewPost'
 import { Glyphicon, Button } from 'react-bootstrap'
@@ -25,6 +25,8 @@ class PostList extends Component {
     }
 
     render() {
+        //console.log(JSON.stringify(this.props.location))
+
         const { posts, showCategory, settings, changeSettings, votePost } = this.props
 
         let myPosts = posts.filter(p => p.deleted === false).sort(sortBy(settings.orderPost))
@@ -48,15 +50,20 @@ class PostList extends Component {
                 <div id='post-block'>
 
                     <div className="my-post-list-page-header">
-                        <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}> Showing posts in {currentCategory}</span>
-                        <span style={{ color: 'red' }} className="pull-right">
+                        <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}> List posts in {currentCategory} </span>
+
+                        <span style={{ color: 'red', marginLeft: '10px' }}>
                             Order by: <Button bsStyle={settings.orderPost === '-timestamp' ? 'primary' : 'default'} bsSize="xsmall"
                                 onClick={() => changeSettings('orderPost', '-timestamp')}
                             >
                                 Time</Button> <Button bsStyle={settings.orderPost === '-voteScore' ? 'primary' : 'default'} bsSize="xsmall"
                                     onClick={() => changeSettings('orderPost', '-voteScore')}
                                 >
-                                Vote Score</Button> </span>
+                                Vote Score</Button>
+                        </span>
+
+                        <AddNewPost caller={this.props.location.pathname} />
+
                     </div>
 
                     {
@@ -106,8 +113,6 @@ class PostList extends Component {
                         ))}
                 </div>
 
-                <AddNewPost />
-
             </div >
         )
     }
@@ -139,4 +144,6 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostList)
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(PostList)
+)

@@ -4,3 +4,6 @@ export function capitalize(str = '') {
     : str[0].toUpperCase() + str.slice(1)
 }
 
+export function getEpoch() {
+  return Math.round(Date.now() / 1000)
+}
