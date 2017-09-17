@@ -73,7 +73,7 @@ class DetailPage extends Component {
                                     <p className="detail-title">
                                         {currentPost.title} <Button onClick={this.onHome} bsStyle="warning" bsSize="xsmall">
                                             <Glyphicon glyph="pencil" /> Edit
-                                            </Button> <DeletePost postId={currentPost.id} needRedirection={true} />
+                                            </Button> <DeletePost postId={currentPost.id} needRedirection={true} caller={currentPost.category} />
                                     </p>
                                     <p className="detail-tagline">
                                         submitted on <Moment unix tz="Asia/Phnom_Penh" format="DD MMM YYYY HH:mm">

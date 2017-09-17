@@ -8,30 +8,36 @@ import { Button, Glyphicon } from 'react-bootstrap'
 class DeletePost extends Component {
 
     componentWillMount() {
-        this.props.redirectFromPost && (
-            this.props.changeSettings('redirectFromPost', false)
+        this.props.isRedirectBack && (
+            this.props.changeSettings('redirectFromDeletePost', false)
+        )
+    }
+
+    componentWillUnmount() {
+        this.props.isRedirectBack && (
+            this.props.changeSettings('redirectFromDeletePost', false)
         )
     }
 
     onConfirmDeletePost(id) {
-        // Preform your action.
-        console.log('Delete Post Id: ' + id)
+        //console.log('Delete Post Id: ' + id)
         this.props.deletePost(id)
 
         let relatedComments = this.props.comments.filter(c => c.parentId === id)
         relatedComments = relatedComments.map( c => c.id)
         //console.log('relatedComments: ' + JSON.stringify(relatedComments))
+
         this.props.updateChildComments(relatedComments)
 
         //redirect
         this.props.needRedirection && (
-            this.props.changeSettings('redirectFromPost', true)
+            this.props.changeSettings('redirectFromDeletePost', true)
         )
 
     }
 
     render() {
-        const { postId, redirectFromPost, needRedirection } = this.props
+        const { postId, isRedirectBack, needRedirection, caller } = this.props
 
         return (
             <span>
@@ -45,8 +51,8 @@ class DeletePost extends Component {
                 </Confirm>
 
                 {needRedirection && (
-                    redirectFromPost && (
-                        <Redirect to='/udacity' />
+                    isRedirectBack && (
+                        <Redirect to={`/${caller}`} />
                     )
                 )}
             </span>
@@ -63,7 +69,7 @@ const mapStateToProps = state => {
 
     return {
         comments,
-        redirectFromPost: state.settings.redirectFromPost
+        isRedirectBack: state.settings.redirectFromDeletePost
     }
 }
 
