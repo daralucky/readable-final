@@ -6,8 +6,9 @@ import '../styles/App.css'
 import PostList from './PostList'
 import DetailPage from './DetailPage'
 import EditPostPage from './EditPostPage'
-
 import AddNewPostPage from './AddNewPostPage'
+import AddCommentPage from './AddCommentPage'
+import EditCommentPage from './EditCommentPage'
 
 class App extends Component {
   componentDidMount() {
@@ -24,6 +25,10 @@ class App extends Component {
         <Route path='/add-new-post' exact component={AddNewPostPage} />
 
         <Route path='/edit-post/:postId' component={EditPostPage} />
+
+        <Route path='/add-comment/:postId' component={AddCommentPage} />
+
+        <Route path='/edit-comment/:commentId' component={EditCommentPage} />
 
         <Route path='/' exact render={() =>
           <PostList showCategory='' />

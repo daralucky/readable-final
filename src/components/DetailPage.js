@@ -8,17 +8,13 @@ import 'moment-timezone'
 import { postUpdateVote, commentUpdateVote, commentDelete } from '../actions'
 import NavigationBar from './NavigationBar'
 import * as CONSTANTS from '../constants'
-import Confirm from 'react-confirm-bootstrap'
 import DeletePost from './DeletePost'
 import EditPost from './EditPost'
+import DeleteComment from './DeleteComment'
+import AddComment from './AddComment'
+import EditComment from './EditComment'
 
 class DetailPage extends Component {
-
-    onConfirmDeleteComment(id) {
-        // Preform your action.
-        console.log('Deleting COMMENT ...')
-        this.props.deleteComment(id)
-    }
 
     render() {
 
@@ -90,9 +86,9 @@ class DetailPage extends Component {
                                     <section id='comments'>
                                         <div id='comments-block'>
                                             <div className="detail-comment-header">
-                                                {currentComments.length} Comments: <span className="pull-right"><Button onClick={this.onHome} bsStyle="success" bsSize="xsmall">
-                                                    <Glyphicon glyph="plus" /> Add Comment
-                                            </Button></span>
+                                                {currentComments.length} Comments:
+                                                {' '}
+                                                <AddComment postId={currentPost.id} caller={this.props.location.pathname} />
                                             </div>
 
                                             {currentComments.map((comment) => (
@@ -119,13 +115,8 @@ class DetailPage extends Component {
                                                                         {comment.timestamp}
                                                                     </Moment>
                                                                     ) </span>
-                                                                <a href='#edit'>edit </a> | <Confirm
-                                                                    onConfirm={() => this.onConfirmDeleteComment(comment.id)}
-                                                                    body="Are you sure you want to delete this comment?"
-                                                                    confirmText="Confirm Delete"
-                                                                    title="Deleting Comment">
-                                                                    <a href='#delete'> delete </a>
-                                                                </Confirm>
+                                                                <EditComment commentId={comment.id} caller={this.props.location.pathname} /> |
+                                                                <DeleteComment commentId={comment.id} />
                                                             </p>
                                                             <p style={{ fontSize: '12px' }}>
                                                                 {comment.body}

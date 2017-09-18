@@ -7,6 +7,8 @@ const initialState = {
     redirectFromDeletePost: false,
     redirectFromAddNewPost: false,
     redirectFromEditPost: false,
+    redirectFromAddComment: false,
+    redirectFromEditComment: false,
 
 }
 

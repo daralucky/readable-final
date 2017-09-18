@@ -2,7 +2,9 @@ import {
     RECEIVE_COMMENTS,
     COMMENT_UPDATE_VOTE,
     COMMENT_DELETE,
-    COMMENT_PARENT_DELETED
+    COMMENT_PARENT_DELETED,
+    COMMENT_ADD_NEW,
+    COMMENT_EDIT
 } from '../actions'
 import * as CONSTANTS from '../constants'
 
@@ -50,6 +52,21 @@ function comments(state = {}, action) {
             return {
                 ...state,
                 [action.payload.id]: parentDeletedComment
+            }
+
+            case COMMENT_ADD_NEW:
+            const { newComment } = action.payload
+            return {
+                ...state,
+                [newComment.id]: newComment
+            }
+
+            case COMMENT_EDIT:
+            const { editedComment } = action.payload
+            console.log('COMMENT_EDIT: ' + JSON.stringify(action.payload, null, 2))
+            return {
+                ...state,
+                [editedComment.id]: editedComment
             }
 
         default:

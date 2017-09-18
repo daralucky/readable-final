@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { MyInputGroup, MyTextAreaGroup, MySelectGroup, MySubmitButtonGroup } from '../utils/MyUIComponents'
+import { MyInputGroup, MyTextAreaGroup, MySubmitButtonGroup } from '../utils/MyUIComponents'
 
 //Validation rules
 const required = value => (value ? undefined : 'Required')
@@ -9,7 +9,6 @@ const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined
 
 const maxLength50 = maxLength(50)
-const maxLength70 = maxLength(70)
 
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
@@ -22,19 +21,19 @@ const alphaNumeric = value =>
     ? 'Only alphanumeric characters'
     : undefined
 
-const PostForm = props => {
-  const { handleSubmit, pristine, reset, submitting, categoryOptions } = props
+const CommentForm = props => {
+  const { handleSubmit, pristine, reset, submitting } = props
 
   return (
     <form onSubmit={handleSubmit} className="form-horizontal">
 
-      <Field
+    <Field
         isHorizontal={true}
-        name="title"
+        name="author"
         type="text"
         component={MyInputGroup}
-        label="Title"
-        validate={[required, maxLength70, minLength3]}
+        label="Author"
+        validate={[required, maxLength50, minLength3]}
         warn={alphaNumeric}
       />
 
@@ -47,25 +46,6 @@ const PostForm = props => {
         validate={[required, minLength5]}
       />
 
-      <Field
-        isHorizontal={true}
-        name="author"
-        type="text"
-        component={MyInputGroup}
-        label="Author"
-        validate={[required, maxLength50, minLength3]}
-        warn={alphaNumeric}
-      />
-
-      <Field
-        isHorizontal={true}
-        name="category"
-        component={MySelectGroup}
-        options={categoryOptions}
-        label="Category"
-        validate={[required]}
-      />
-
       <MySubmitButtonGroup submitting={submitting} pristine={pristine} reset={reset} />
 
     </form>
@@ -73,5 +53,5 @@ const PostForm = props => {
 }
 
 export default reduxForm({
-  form: 'postForm' // a unique identifier for this form
-})(PostForm)
+  form: 'commentForm' // a unique identifier for this form
+})(CommentForm)

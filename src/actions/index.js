@@ -17,6 +17,9 @@ export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
 export const COMMENT_UPDATE_VOTE = "COMMENT_UPDATE_VOTE"
 export const COMMENT_DELETE = "COMMENT_DELETE"
 export const COMMENT_PARENT_DELETED = "COMMENT_PARENT_DELETED"
+export const COMMENT_ADD_NEW = "COMMENT_ADD_NEW"
+export const COMMENT_EDIT = "COMMENT_EDIT"
+
 
 export const UPDATE_SETTINGS = "UPDATE_SETTINGS"
 
@@ -28,6 +31,41 @@ export const updateSettings = (key, value) => ({
 })
 
 
+export const commentAddNew = (values) => {
+
+  const newComment = {
+    'id': UUID.v4(),
+    'timestamp': getEpoch(),
+    ...values,
+    voteScore: 1,
+    deleted: false,
+    parentDeleted: false
+  }
+
+  //add new post to API
+  ReadableAPI.addNewComment(newComment.id, newComment.timestamp, newComment.body, newComment.author, newComment.parentId)
+
+  return {
+    type: COMMENT_ADD_NEW,
+    payload: {
+      newComment
+    }
+  }
+}
+
+export const commentEdit = (editedComment) => {
+
+  //update comment to API
+  ReadableAPI.editComment(editedComment.id, editedComment.timestamp, editedComment.body, editedComment.author)
+
+  return {
+    type: COMMENT_EDIT,
+    payload: {
+      editedComment
+    }
+  }
+
+}
 
 export const commentParentDeleted = (id) => {
 
@@ -90,8 +128,8 @@ export const fetchComments = (postId) => dispatch => (
 
 export const postEdit = (editedPost) => {
 
-  //add new post to API
-  ReadableAPI.addNewPost(editedPost.id, editedPost.timestamp, editedPost.title, editedPost.body, editedPost.author, editedPost.category)
+  //update post to API
+  ReadableAPI.editPost(editedPost.id, editedPost.timestamp, editedPost.title, editedPost.body, editedPost.author, editedPost.category)
 
   return {
     type: POST_EDIT,
@@ -99,7 +137,6 @@ export const postEdit = (editedPost) => {
       editedPost
     }
   }
-
 
 }
 

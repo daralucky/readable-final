@@ -77,6 +77,28 @@ export const postDelete = (id) =>
 
 //Comments
 
+//add new Comment
+export const addNewComment = (id, timestamp, body, author, parentId) =>
+fetch(`${api}/comments`, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ id, timestamp, body, author, parentId })
+}).then(res => res.json())
+
+//edit Comment
+export const editComment = (id, timestamp, body, author) =>
+fetch(`${api}/comments/${id}`, {
+  method: 'PUT',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ timestamp, body, author })
+}).then(res => res.json())
+
 //Get all the comments for a single post
 export const getCommentByPostId = (Id) =>
   fetch(`${api}/posts/${Id}/comments`, { headers })
