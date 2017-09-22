@@ -22,16 +22,16 @@ class AddCommentPage extends Component {
      * Normally, this can be handle by component own state
      */    componentWillUnmount() {
         this.props.isRedirectBack && (
-            this.props.changeSettings('redirectFromAddComment', false)
+            this.props.updateSettings('redirectFromAddComment', false)
         )
     }
 
     mySubmitHandler(values) {
         //console.log('my handler:: ' + JSON.stringify(values, null, 2))
-        this.props.addComment(values)
+        this.props.commentAddNew(values)
 
         //change redirect State in the Store
-        this.props.changeSettings('redirectFromAddComment', true)
+        this.props.updateSettings('redirectFromAddComment', true)
     }
 
     render() {
@@ -67,19 +67,13 @@ class AddCommentPage extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ settings }) => {
     return {
-        isRedirectBack: state.settings.redirectFromAddComment
+        isRedirectBack: settings.redirectFromAddComment
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addComment: (value) => (dispatch(commentAddNew(value))),
-        changeSettings: (key, value) => dispatch(updateSettings(key, value)),
-    }
-}
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    { commentAddNew, updateSettings }
 )(AddCommentPage)
