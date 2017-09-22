@@ -33,15 +33,12 @@ class PostList extends Component {
         let myPosts = posts.filter(p => p.deleted === false).sort(sortBy(settings.orderPost))
 
         //console.log("showCategory: " + JSON.stringify(showCategory))
-        //filter posts by category
 
-        let currentCategory
-        if (showCategory !== '') {
-            myPosts = myPosts.filter(p => p.category === showCategory)
-            currentCategory = capitalize(showCategory)
-        } else {
-            currentCategory = 'All'
-        }
+        //filter posts by category
+        let currentCategory = showCategory === '' ? 'All' : (
+            myPosts = myPosts.filter(p => p.category === showCategory),
+            capitalize(showCategory)
+        )
 
         return (
             <div>
@@ -146,5 +143,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(PostList)
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(PostList)
 )
