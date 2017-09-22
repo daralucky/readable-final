@@ -4,7 +4,7 @@ import { Route, withRouter } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from '../actions'
 import '../styles/App.css'
 import PostList from './PostList'
-import DetailPage from './DetailPage'
+import PostDetails from './PostDetails'
 import EditPostPage from './EditPostPage'
 import AddNewPostPage from './AddNewPostPage'
 import AddCommentPage from './AddCommentPage'
@@ -41,7 +41,7 @@ class App extends Component {
                 <PostList showCategory={category.name} />
               } />
 
-              <Route path={`/${category.path}/:postId`} component={DetailPage} />
+              <Route path={`/${category.path}/:postId`} component={PostDetails} />
 
             </div>
           ))

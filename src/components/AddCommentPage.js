@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { commentAddNew, updateSettings } from '../actions'
 import CommentForm from './CommentForm'
 import NavigationBar from './NavigationBar'
@@ -44,14 +44,15 @@ class AddCommentPage extends Component {
             <div>
                 <NavigationBar />
 
-                <div className="my-post-list-page-header">
-                    <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}>
-                        Add New Comment
+                <div className="my-form-page-header">
+                    <Link to={redirectPath} className="back-arrow" title="Back" />
+                    {' '}
+                    <span className="my-header-title">                        Add New Comment
                     </span>
                 </div>
 
                 <CommentForm
-                    initialValues={{'parentId': postId}}
+                    initialValues={{ 'parentId': postId }}
                     onSubmit={values => this.mySubmitHandler(values)}
                 />
 

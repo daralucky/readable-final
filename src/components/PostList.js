@@ -51,7 +51,7 @@ class PostList extends Component {
                 <div id='post-block'>
 
                     <div className="my-post-list-page-header">
-                        <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}> List posts in {currentCategory} </span>
+                        <span className="my-header-title"> List posts in {currentCategory} </span>
 
                         <span style={{ color: 'red', marginLeft: '10px' }}>
                             Order by: <Button bsStyle={settings.orderPost === '-timestamp' ? 'primary' : 'default'} bsSize="xsmall"

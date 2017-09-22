@@ -63,7 +63,7 @@ function comments(state = {}, action) {
 
             case COMMENT_EDIT:
             const { editedComment } = action.payload
-            console.log('COMMENT_EDIT: ' + JSON.stringify(action.payload, null, 2))
+            //console.log('COMMENT_EDIT: ' + JSON.stringify(action.payload, null, 2))
             return {
                 ...state,
                 [editedComment.id]: editedComment
