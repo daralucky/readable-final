@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Switch } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from '../actions'
 import '../styles/App.css'
 import PostList from './PostList'
@@ -9,6 +9,7 @@ import EditPostPage from './EditPostPage'
 import AddNewPostPage from './AddNewPostPage'
 import AddCommentPage from './AddCommentPage'
 import EditCommentPage from './EditCommentPage'
+import NoMatch from './NoMatch'
 
 class App extends Component {
   componentDidMount() {
@@ -22,30 +23,39 @@ class App extends Component {
     return (
       <div id="App" className="container">
 
-        <Route path='/add-new-post' exact component={AddNewPostPage} />
+        <Switch>
 
-        <Route path='/edit-post/:postId' component={EditPostPage} />
+          <Route path='/add-new-post' exact component={AddNewPostPage} />
 
-        <Route path='/add-comment/:postId' component={AddCommentPage} />
+          <Route path='/edit-post/:postId' component={EditPostPage} />
 
-        <Route path='/edit-comment/:commentId' component={EditCommentPage} />
+          <Route path='/add-comment/:postId' component={AddCommentPage} />
 
-        <Route path='/' exact render={() =>
-          <PostList showCategory='' />
-        } />
+          <Route path='/edit-comment/:commentId' component={EditCommentPage} />
 
-        {
-          categories.map(category => (
-            <div key={category.path}>
-              <Route path={`/${category.path}`} exact render={() =>
+          <Route path='/' exact render={() =>
+            <PostList showCategory='' />
+          } />
+
+          {
+            categories.map(category => (
+              <Route key={category.path} path={`/${category.path}`} exact render={() =>
                 <PostList showCategory={category.name} />
               } />
 
-              <Route path={`/${category.path}/:postId`} component={PostDetails} />
+            ))
+          }
 
-            </div>
-          ))
-        }
+          {
+            categories.map(category => (
+              <Route key={category.path} path={`/${category.path}/:postId`} component={PostDetails} />
+
+            ))
+          }
+
+          <Route component={NoMatch} />
+
+        </Switch>
 
       </div>
     );
