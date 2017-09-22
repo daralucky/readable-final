@@ -3,29 +3,12 @@ import { normalize } from 'normalizr';
 import * as UUID from 'uuid'
 import { categorySchema, postSchema, commentSchema } from '../schemas';
 import { getEpoch } from '../utils/helpers'
+import * as types from './types'
 
-export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
-
-export const RECEIVE_POSTS = "RECEIVE_POSTS"
-export const POST_UPDATE_VOTE = "POST_UPDATE_VOTE"
-export const POST_DELETE = "POST_DELETE"
-export const POST_ADD_NEW = "POST_ADD_NEW"
-export const POST_EDIT = "POST_EDIT"
-
-
-export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS"
-export const COMMENT_UPDATE_VOTE = "COMMENT_UPDATE_VOTE"
-export const COMMENT_DELETE = "COMMENT_DELETE"
-export const COMMENT_PARENT_DELETED = "COMMENT_PARENT_DELETED"
-export const COMMENT_ADD_NEW = "COMMENT_ADD_NEW"
-export const COMMENT_EDIT = "COMMENT_EDIT"
-
-
-export const UPDATE_SETTINGS = "UPDATE_SETTINGS"
 
 
 export const updateSettings = (key, value) => ({
-  type: UPDATE_SETTINGS,
+  type: types.UPDATE_SETTINGS,
   key,
   value
 })
@@ -46,7 +29,7 @@ export const commentAddNew = (values) => {
   ReadableAPI.addNewComment(newComment.id, newComment.timestamp, newComment.body, newComment.author, newComment.parentId)
 
   return {
-    type: COMMENT_ADD_NEW,
+    type: types.COMMENT_ADD_NEW,
     payload: {
       newComment
     }
@@ -59,7 +42,7 @@ export const commentEdit = (editedComment) => {
   ReadableAPI.editComment(editedComment.id, editedComment.timestamp, editedComment.body, editedComment.author)
 
   return {
-    type: COMMENT_EDIT,
+    type: types.COMMENT_EDIT,
     payload: {
       editedComment
     }
@@ -70,7 +53,7 @@ export const commentEdit = (editedComment) => {
 export const commentParentDeleted = (id) => {
 
   return {
-    type: COMMENT_PARENT_DELETED,
+    type: types.COMMENT_PARENT_DELETED,
     payload: {
       id
     }
@@ -82,7 +65,7 @@ export const commentDelete = (id) => {
   ReadableAPI.commentDelete(id)
 
   return {
-    type: COMMENT_DELETE,
+    type: types.COMMENT_DELETE,
     payload: {
       id
     }
@@ -94,7 +77,7 @@ export const commentUpdateVote = (id, mechanism) => {
   ReadableAPI.commentVote(id, mechanism)
 
   return {
-    type: COMMENT_UPDATE_VOTE,
+    type: types.COMMENT_UPDATE_VOTE,
     payload: {
       id,
       mechanism
@@ -103,7 +86,7 @@ export const commentUpdateVote = (id, mechanism) => {
 }
 
 export const receiveComments = comments => ({
-  type: RECEIVE_COMMENTS,
+  type: types.RECEIVE_COMMENTS,
   comments
 })
 
@@ -132,7 +115,7 @@ export const postEdit = (editedPost) => {
   ReadableAPI.editPost(editedPost.id, editedPost.timestamp, editedPost.title, editedPost.body, editedPost.author, editedPost.category)
 
   return {
-    type: POST_EDIT,
+    type: types.POST_EDIT,
     payload: {
       editedPost
     }
@@ -155,7 +138,7 @@ export const postAddNew = (values) => {
   ReadableAPI.addNewPost(newPost.id, newPost.timestamp, newPost.title, newPost.body, newPost.author, newPost.category)
 
   return {
-    type: POST_ADD_NEW,
+    type: types.POST_ADD_NEW,
     payload: {
       newPost
     }
@@ -171,7 +154,7 @@ export const postDelete = (id) => {
   ReadableAPI.postDelete(id)
 
   return {
-    type: POST_DELETE,
+    type: types.POST_DELETE,
     payload: {
       id
     }
@@ -184,7 +167,7 @@ export const postUpdateVote = (id, mechanism) => {
   ReadableAPI.postVote(id, mechanism)
 
   return {
-    type: POST_UPDATE_VOTE,
+    type: types.POST_UPDATE_VOTE,
     payload: {
       id,
       mechanism
@@ -193,7 +176,7 @@ export const postUpdateVote = (id, mechanism) => {
 }
 
 export const receivePosts = posts => ({
-  type: RECEIVE_POSTS,
+  type: types.RECEIVE_POSTS,
   posts
 })
 
@@ -223,7 +206,7 @@ export const fetchPosts = () => dispatch => (
 
 
 export const receiveCategories = categories => ({
-  type: RECEIVE_CATEGORIES,
+  type: types.RECEIVE_CATEGORIES,
   categories
 })
 

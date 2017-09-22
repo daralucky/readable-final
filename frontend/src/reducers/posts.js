@@ -4,7 +4,7 @@ import {
     POST_DELETE,
     POST_ADD_NEW,
     POST_EDIT
-} from '../actions'
+} from '../actions/types'
 import * as CONSTANTS from '../constants'
 
 

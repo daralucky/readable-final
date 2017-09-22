@@ -1,6 +1,6 @@
 import {
     RECEIVE_CATEGORIES
-} from '../actions'
+} from '../actions/types'
 
 
 function categories(state = {}, action) {

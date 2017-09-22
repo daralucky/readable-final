@@ -1,6 +1,6 @@
 import {
     UPDATE_SETTINGS
-} from '../actions'
+} from '../actions/types'
 
 const initialState = {
     orderPost: '-voteScore',

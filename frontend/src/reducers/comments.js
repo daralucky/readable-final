@@ -5,7 +5,7 @@ import {
     COMMENT_PARENT_DELETED,
     COMMENT_ADD_NEW,
     COMMENT_EDIT
-} from '../actions'
+} from '../actions/types'
 import * as CONSTANTS from '../constants'
 
 
