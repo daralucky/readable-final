@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { postAddNew, updateSettings } from '../actions'
 import { capitalize } from '../utils/helpers'
 import PostForm from './PostForm'
 import NavigationBar from './NavigationBar'
+
 
 class AddNewPostPage extends Component {
 
@@ -46,17 +47,19 @@ class AddNewPostPage extends Component {
             <div>
                 <NavigationBar />
 
-                <div className="my-post-list-page-header">
-                    <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}>
+                <div className="my-form-page-header">
+                    <Link to={redirectPath} className="back-arrow" title="Back" />
+                    {' '}
+                   <span className="my-header-title">
                         Add New Post
                     </span>
                 </div>
-
+                <div>
                 <PostForm
                     categoryOptions={categories}
                     onSubmit={values => this.mySubmitHandler(values)}
                 />
-
+                </div>
                 {
                     isRedirectBack && (
                         <Redirect to={redirectPath} />

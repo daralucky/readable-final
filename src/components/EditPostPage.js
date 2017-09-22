@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { postEdit, updateSettings } from '../actions'
 import { capitalize } from '../utils/helpers'
 import PostForm from './PostForm'
@@ -50,9 +50,10 @@ class EditPostPage extends Component {
             <div>
                 <NavigationBar />
 
-                <div className="my-post-list-page-header">
-                    <span style={{ color: 'DodgerBlue', fontWeight: 'bold', fontSize: 'x-large' }}>
-                        Edit Post
+                <div className="my-form-page-header">
+                    <Link to={redirectPath} className="back-arrow" title="Back" />
+                    {' '}
+                    <span className="my-header-title">                        Edit Post
                     </span>
                 </div>
 
