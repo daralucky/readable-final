@@ -15,7 +15,7 @@ class AddNewPostPage extends Component {
      */
     componentWillMount() {
         this.props.isRedirectBack && (
-            this.props.changeSettings('redirectFromAddNewPost', false)
+            this.props.updateSettings('redirectFromAddNewPost', false)
         )
     }
 
@@ -24,16 +24,16 @@ class AddNewPostPage extends Component {
      * Normally, this can be handle by component own state
      */    componentWillUnmount() {
         this.props.isRedirectBack && (
-            this.props.changeSettings('redirectFromAddNewPost', false)
+            this.props.updateSettings('redirectFromAddNewPost', false)
         )
     }
 
     mySubmitHandler(values) {
         //console.log('my handler:: ' + JSON.stringify(values, null, 2))
-        this.props.addPost(values)
+        this.props.postAddNew(values)
 
         //change redirect State in the Store
-        this.props.changeSettings('redirectFromAddNewPost', true)
+        this.props.updateSettings('redirectFromAddNewPost', true)
     }
 
     render() {
@@ -85,13 +85,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addPost: (value) => (dispatch(postAddNew(value))),
-        changeSettings: (key, value) => dispatch(updateSettings(key, value)),
-    }
-}
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    { postAddNew, updateSettings }
 )(AddNewPostPage)
